@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
     <UContainer>
         <UCard class="mt-10">
@@ -11,5 +14,6 @@
                 Open Nuxt UI Documentation
             </UButton>
         </UCard>
+        <NuxtPage />
     </UContainer>
 </template>

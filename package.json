@@ -15,32 +15,19 @@
     },
     "devDependencies": {
         "@antfu/eslint-config": "^2.21.2",
-        "@commitlint/cli": "17.6.3",
-        "@commitlint/config-conventional": "17.6.3",
-        "@commitlint/prompt-cli": "17.6.3",
         "@nuxt/devtools": "latest",
         "@nuxt/ui": "^2.17.0",
         "@nuxtjs/tailwindcss": "^6.12.0",
         "eslint": "9.6.0",
         "husky": "^8.0.3",
-        "nuxt": "^3.12.2"
+        "lint-staged": "^15.2.7",
+        "nuxt": "^3.12.2",
+        "simple-git-hooks": "^2.11.1"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged"
     },
     "lint-staged": {
-        "*.ts": [
-            "eslint --fix"
-
-        ],
-        "*.md": [
-            "eslint --fix"
-
-        ],
-        "*.vue": [
-            "eslint --fix"
-        ]
-
-    },
-    "gitHooks": {
-        "pre-commit": "lint-staged",
-        "commit-msg": "commitlint -e -V "
+        "*": "eslint --fix"
     }
 }
