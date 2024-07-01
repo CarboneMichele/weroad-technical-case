@@ -9,10 +9,10 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "dependencies": {
-    "@nuxt/eslint": "^0.3.13",
-    "nuxt": "^3.12.2",
-    "vue": "latest"
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/ui": "^2.17.0",
+    "nuxt": "^3.12.2"
   },
-  "packageManager": "pnpm@9.1.1+sha1.09ada6cd05003e0ced25fb716f9fda4063ec2e3b"
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }
