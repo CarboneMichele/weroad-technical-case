@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-    icon: '🏠',
-    breadcrumb: 'Home',
-})
 </script>
 
 <template>
