@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const showAside = ref(false)
+const showAside = ref(false);
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-const emits = defineEmits(['toggle-menu'])
+const emits = defineEmits(['toggle-menu']);
 </script>
 
 <template>

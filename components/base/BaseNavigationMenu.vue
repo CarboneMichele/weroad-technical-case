@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 
 const topLevelRoutes = computed(() => {
-    return router.getRoutes().filter(route => route.path.split('/').length === 2)
-})
+    return router.getRoutes().filter(route => route.path.split('/').length === 2);
+});
 </script>
 
 <template>
