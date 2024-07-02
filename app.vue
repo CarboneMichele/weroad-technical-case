@@ -2,7 +2,10 @@
 </script>
 
 <template>
-    <UContainer>
+    <NuxtLayout name="dashboard-layout">
+        <NuxtPage />
+    </NuxtLayout>
+    <!-- <UContainer>
         <UCard class="mt-10">
             <template #header>
                 <div class="flex justify-between">
@@ -14,6 +17,5 @@
                 Open Nuxt UI Documentation
             </UButton>
         </UCard>
-        <NuxtPage />
-    </UContainer>
+    </UContainer> -->
 </template>

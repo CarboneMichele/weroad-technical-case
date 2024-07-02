@@ -9,4 +9,9 @@ export default defineNuxtConfig({
             pathPrefix: false,
         },
     ],
+    hooks: {
+        'prerender:routes': function ({ routes }) {
+            routes.clear()
+        },
+    },
 })
