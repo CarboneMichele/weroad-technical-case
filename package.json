@@ -29,10 +29,16 @@
         "sass": "^1.77.6",
         "simple-git-hooks": "^2.11.1"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run precommit"
+        }
+    },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"
     },
     "lint-staged": {
         "*": "eslint . --fix"
     }
+
 }
