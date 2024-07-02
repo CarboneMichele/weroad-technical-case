@@ -10,7 +10,7 @@ interface IBreadcrumb {
 
 const route = useRoute()
 
-const crumbs = computed<IBreadcrumb[]>(() => {
+const breadcrumbs = computed<IBreadcrumb[]>(() => {
     const matched: RouteLocationMatched[] = route.matched
 
     return matched.map((match: RouteRecordNormalized) => ({
@@ -23,11 +23,11 @@ const crumbs = computed<IBreadcrumb[]>(() => {
 <template>
     <nav aria-label="breadcrumb">
         <ol class="list-reset flex text-gray-600">
-            <li v-for="(crumb, index) in crumbs" :key="index" class="flex items-center">
-                <NuxtLink :to="crumb.path" class="text-accent-600 hover:underline">
-                    {{ crumb.name }}
+            <li v-for="(breadcrumb, index) in breadcrumbs" :key="index" class="flex items-center">
+                <NuxtLink :to="breadcrumb.path" class="text-accent-600 hover:underline">
+                    {{ breadcrumb.name }}
                 </NuxtLink>
-                <span v-if="index < crumbs.length - 1" class="mx-2 text-accent-600">/</span>
+                <span v-if="index < breadcrumbs.length - 1" class="mx-2 text-accent-600">/</span>
             </li>
         </ol>
     </nav>
