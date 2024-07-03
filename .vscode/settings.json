@@ -23,6 +23,13 @@
         { "rule": "*semi", "severity": "off" }
     ],
 
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+
+    "css.validate": false,
+    "editor.inlineSuggest.enabled": true,
+
     // Enable eslint for all supported languages
     "eslint.validate": [
         "javascript",
@@ -45,5 +52,8 @@
         "scss",
         "pcss",
         "postcss"
+    ],
+    "cSpell.words": [
+        "autoresize"
     ]
 }

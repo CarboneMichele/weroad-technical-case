@@ -1,6 +1,6 @@
 // server/data.ts
 import { v4 as uuidv4 } from 'uuid';
-import type { ITravel } from '../../types/travels.model';
+import type { ITravel } from '../../types/travels/travels.model';
 
 let travels: ITravel[] = [
     {
@@ -23,9 +23,19 @@ let travels: ITravel[] = [
         price: 2000,
         rating: 4.9,
     },
+
 ];
 
-export const getTravels = () => travels;
+function delay(milliseconds: number = 1000): Promise<void> {
+    return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+export async function getTravels(): Promise<ITravel[]> {
+    await delay(1000);
+    return travels;
+};
 
 export function addTravel(travel: Omit<ITravel, 'id'>) {
     const newTravel = { ...travel, id: uuidv4() };

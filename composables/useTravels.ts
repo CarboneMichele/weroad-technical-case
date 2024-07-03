@@ -1,71 +1,31 @@
-import { ref } from 'vue';
-import type { ITravel } from '~/types/travels.model';
+import { storeToRefs } from 'pinia';
+import { useTravelsStore } from '~/stores/travels.store.js';
+import type { ITravel } from '~/types/travels/travels.model.js';
 
 export function useTravels() {
-    const travels = ref<ITravel[]>([]);
-    const error = ref<Error | null | unknown>(null);
+    const travelStore = useTravelsStore();
+    const { travels, error, loading } = storeToRefs(travelStore);
 
-    async function fetchTravels(): Promise<void> {
-        try {
-            const response: Response = await fetch('/api/travels');
-            travels.value = await response.json();
-        }
-        catch (err) {
-            error.value = err;
-        }
+    async function fetchTravels(q?: string) {
+        await travelStore.fetchTravels(q);
     }
 
-    async function addTravel(travel: ITravel): Promise<void> {
-        try {
-            const response: Response = await fetch('/api/addTravel', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(travel),
-            });
-            const newTravel: { travel: ITravel } = await response.json();
-            travels.value.push(newTravel.travel);
-        }
-        catch (err) {
-            error.value = err;
-        }
+    async function addTravel(travel: Partial<ITravel>) {
+        await travelStore.addTravel(travel);
     }
 
-    async function updateTravel(id: string, updatedTravel: ITravel): Promise<void> {
-        try {
-            await fetch(`/api/updateTravel/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedTravel),
-            });
-            const index: number = travels.value.findIndex((travel: ITravel) => travel.id === id);
-            if (index !== -1) {
-                travels.value[index] = { ...travels.value[index], ...updatedTravel };
-            }
-        }
-        catch (err) {
-            error.value = err;
-        }
+    async function updateTravel(id: string, updatedTravel: ITravel) {
+        await travelStore.updateTravel(id, updatedTravel);
     }
 
-    async function deleteTravel(id: string): Promise<void> {
-        try {
-            await fetch(`/api/deleteTravel/${id}`, {
-                method: 'DELETE',
-            });
-            travels.value = travels.value.filter((travel: ITravel) => travel.id !== id);
-        }
-        catch (err) {
-            error.value = err;
-        }
+    async function deleteTravel(id: string) {
+        await travelStore.deleteTravel(id);
     }
 
     return {
         travels,
         error,
+        loading,
         fetchTravels,
         addTravel,
         updateTravel,

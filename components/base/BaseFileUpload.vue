@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { onBeforeUnmount, ref } from 'vue';
+
+const emit = defineEmits(['base64Change']);
+
+const picture = ref<File | null>(null);
+const previewURL = ref<string>('');
+
+function handleFileChange(filesList: FileList): void {
+    picture.value = filesList[0];
+    previewURL.value = URL.createObjectURL(picture.value);
+
+    // Read file as base64 and emit to parent
+    const reader = new FileReader();
+    reader.onload = () => {
+        const base64Data: string = (reader.result as string)?.split(',')[1];
+        emit('base64Change', base64Data);
+    };
+
+    reader.readAsDataURL(picture.value);
+}
+
+onBeforeUnmount(() => {
+    if (previewURL.value) {
+        URL.revokeObjectURL(previewURL.value);
+    }
+});
+</script>
+
+<template>
+    <div class="flex flex-col gap-y-2">
+        <UInput
+            type="file"
+            accept="image/*"
+            @change="handleFileChange"
+        />
+        <div v-if="previewURL" class="rounded self-center w-full h-[300px] flex object-contain">
+            <img class="rounded-md shadow-md" :src="previewURL" alt="Preview">
+        </div>
+    </div>
+</template>

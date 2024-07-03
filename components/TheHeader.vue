@@ -1,5 +1,5 @@
 <script setup>
-const emits = defineEmits(['toggle-menu']);
+const emit = defineEmits(['toggle-menu']);
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const emits = defineEmits(['toggle-menu']);
                     <USelect v-model="$colorMode.preference" :options="['system', 'light', 'dark']" />
                 </ColorScheme>
                 <!-- Hamburger Menu -->
-                <button class="md:hidden focus:outline-none" @click="emits('toggle-menu')">
+                <button class="md:hidden focus:outline-none" @click="emit('toggle-menu')">
                     <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>

@@ -1,9 +1,9 @@
 import { defineEventHandler, readBody } from 'h3';
-import { addTravel } from '../../api/data';
-import type { ITravel } from '../../../types/travels.model';
+import type { ITravel } from './../../types/travels/travels.model';
+import { addTravel } from './data';
 
 export default defineEventHandler(async (event) => {
     const newTravel: Omit<ITravel, 'id'> = await readBody(event);
-    const addedTravel = addTravel(newTravel);
+    const addedTravel: ITravel = addTravel(newTravel);
     return { message: 'Travel added successfully', travel: addedTravel };
 });

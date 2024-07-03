@@ -4,6 +4,7 @@
 
 <template>
     <div> Travel </div>
+    <TravelEditorForm />
 </template>
 
 <style scoped lang="scss">

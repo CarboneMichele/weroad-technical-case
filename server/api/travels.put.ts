@@ -1,6 +1,6 @@
 import { defineEventHandler, readBody } from 'h3';
-import { updateTravel } from '../../api/data';
-import type { ITravel } from '../../../types/travels.model';
+import type { ITravel } from '../../types/travels/travels.model';
+import { updateTravel } from './data';
 
 export default defineEventHandler(async (event) => {
     const updatedTravel: ITravel = await readBody(event);
