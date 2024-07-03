@@ -73,7 +73,7 @@ onMounted(() => {
 
 <template>
     <UForm :validate="validate" :validate-on="['submit']" :state="travelFormModel" class="flex flex-col gap-y-3" @submit="onSubmit">
-        <UFormGroup label="Name *" name="name">
+        <UFormGroup label="Name" name="name" required>
             <UInput v-model="travelFormModel.name" />
         </UFormGroup>
 
@@ -81,15 +81,15 @@ onMounted(() => {
             <UTextarea v-model="travelFormModel.description" :rows="1" autoresize />
         </UFormGroup>
 
-        <UFormGroup label="TimeFrame *">
+        <UFormGroup label="TimeFrame" required>
             <BaseDateRangePicker :model-value="dateRange" @update:model-value="updateDateRange($event)" />
         </UFormGroup>
 
-        <UFormGroup label="Price *" name="price">
+        <UFormGroup label="Price (€)" required name="price">
             <UInput v-model="travelFormModel.price" type="number" />
         </UFormGroup>
 
-        <UFormGroup label="Picture * " name="picture">
+        <UFormGroup label="Picture" name="picture" required>
             <BaseFileUpload
                 :base64="travelFormModel.picture"
                 @base64-change="(base64: string) => {

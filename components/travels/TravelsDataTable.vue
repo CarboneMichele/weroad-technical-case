@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { format } from 'date-fns';
 import { ref, watch } from 'vue';
 import { useTravels } from '~/composables/useTravels';
 
@@ -30,7 +31,7 @@ const columns = [
     },
     {
         key: 'price',
-        label: 'Price',
+        label: 'Price (€)',
         sortable: true,
     },
     {
@@ -65,7 +66,21 @@ onMounted(() => {
                 New Travel
             </UButton>
         </div>
-        <UTable :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)" />
+        <UTable :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)">
+            <template #departureDate-data="{ row }">
+                <span> {{ format(new Date(row.departureDate), 'MM/dd/yyyy') }}</span>
+            </template>
+            <template #returnDate-data="{ row }">
+                <span> {{ format(new Date(row.returnDate), 'MM/dd/yyyy') }}</span>
+            </template>
+
+            <template #empty-state>
+                <div class="flex flex-col items-center justify-center py-6 gap-3">
+                    <span class="italic text-sm">0 travels!</span>
+                    <UButton label="Add travel" @click="emit('toggleTravelCreation')" />
+                </div>
+            </template>
+        </UTable>
         <p v-if="error" class="text-red-500">
             {{ error.message }}
         </p>

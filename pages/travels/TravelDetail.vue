@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { format } from 'date-fns';
 import { utilsService } from '~/services/utils.service';
 
 const { selectedTravel, setSelectedTravel, fetchTravelDetails, loading, deleteTravel } = useTravels();
@@ -68,15 +69,16 @@ onBeforeUnmount(() => {
                 </BasePopConfirm>
             </div>
         </div>
-        <p class="text-sm break-words">
-            {{ selectedTravel.description }}
-        </p>
-        <p class="text-sm">
-            {{ selectedTravel.price }}
-        </p>
-        <p class="text-sm">
-            {{ selectedTravel.rating }}
-        </p>
+        <BaseFieldDetail label="Description" :value="selectedTravel.description" />
+
+        <div class="flex gap-6">
+            <BaseFieldDetail label="Departure" :value=" format(new Date(selectedTravel.departureDate), 'MM/dd/yyyy')" />
+            <BaseFieldDetail label="Return" :value=" format(new Date(selectedTravel.returnDate), 'MM/dd/yyyy')" />
+        </div>
+
+        <BaseFieldDetail label="Price (€)" :value="selectedTravel.price" />
+
+        <BaseFieldDetail label="Average user rating" :value="selectedTravel.rating || '-'" />
     </div>
     <UModal v-model="showEditModal">
         <UCard

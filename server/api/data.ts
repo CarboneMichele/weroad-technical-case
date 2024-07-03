@@ -2,9 +2,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { ITravel } from '../../types/travels/travels.model';
 
-let travels: ITravel[] = [
-
-];
+let travels: ITravel[] = [];
 
 function delay(milliseconds: number = 1000): Promise<void> {
     return new Promise((resolve) => {
