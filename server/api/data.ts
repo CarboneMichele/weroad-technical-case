@@ -3,26 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import type { ITravel } from '../../types/travels/travels.model';
 
 let travels: ITravel[] = [
-    {
-        id: '1',
-        name: 'Viaggio a Parigi',
-        departureDate: '2024-08-01',
-        returnDate: '2024-08-10',
-        picture: 'url_dell_immagine',
-        description: 'Descrizione del tour a Parigi',
-        price: 1200,
-        rating: 4.7,
-    },
-    {
-        id: '2',
-        name: 'Viaggio a New York',
-        departureDate: '2024-09-15',
-        returnDate: '2024-09-25',
-        picture: 'url_dell_immagine',
-        description: 'Descrizione del tour a New York',
-        price: 2000,
-        rating: 4.9,
-    },
 
 ];
 
@@ -37,19 +17,27 @@ export async function getTravels(): Promise<ITravel[]> {
     return travels;
 };
 
+export async function getTravelById(id: string): Promise<ITravel | undefined> {
+    const allTravels = await getTravels();
+    await delay(1000);
+    return allTravels.find(travel => travel.id === id);
+}
+
 export function addTravel(travel: Omit<ITravel, 'id'>) {
     const newTravel = { ...travel, id: uuidv4() };
     travels.push(newTravel);
     return newTravel;
 }
 
-export function updateTravel(updatedTravel: ITravel, id?: string) {
+export async function updateTravel(updatedTravel: ITravel, id?: string) {
+    await delay(1000);
     if (!id) {
         return;
     }
     travels = travels.map(travel => (travel.id === id ? { ...updatedTravel, id } : travel));
 }
 
-export function deleteTravel(id: string) {
+export async function deleteTravel(id: string) {
+    await delay(1000);
     travels = travels.filter(travel => travel.id !== id);
 }

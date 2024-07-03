@@ -5,11 +5,12 @@ import { travelsService } from '~/services/travels.service';
 export const useTravelsStore = defineStore('travels', {
     state: (): ITravelsStoreState => ({
         travels: [],
+        selectedTravel: undefined,
         error: null,
         loading: false,
     }),
     actions: {
-        async fetchTravels(q?: string) {
+        async fetchTravels(q?: string): Promise<void> {
             this.$state.loading = true;
             try {
                 this.travels = await travelsService.fetchTravels(q);
@@ -21,7 +22,20 @@ export const useTravelsStore = defineStore('travels', {
                 this.$state.loading = false;
             }
         },
-        async addTravel(travel: Partial<ITravel>) {
+        async fetchTravelDetails(id: string): Promise<void> {
+            this.$state.loading = true;
+            try {
+                const currentTravel = await travelsService.fetchTravelDetails(id);
+                this.setSelectedTravel(currentTravel);
+            }
+            catch (err) {
+                this.$state.error = err as Error;
+            }
+            finally {
+                this.$state.loading = false;
+            }
+        },
+        async addTravel(travel: Partial<ITravel>): Promise<void> {
             this.$state.loading = true;
             try {
                 const newTravel = await travelsService.addTravel(travel);
@@ -34,7 +48,7 @@ export const useTravelsStore = defineStore('travels', {
                 this.$state.loading = false;
             }
         },
-        async updateTravel(id: string, updatedTravel: ITravel) {
+        async updateTravel(id: string, updatedTravel: Partial<ITravel>): Promise<void> {
             this.$state.loading = true;
             try {
                 await travelsService.updateTravel(id, updatedTravel);
@@ -50,7 +64,7 @@ export const useTravelsStore = defineStore('travels', {
                 this.$state.loading = false;
             }
         },
-        async deleteTravel(id: string) {
+        async deleteTravel(id: string): Promise<void> {
             this.$state.loading = true;
             try {
                 await travelsService.deleteTravel(id);
@@ -62,6 +76,9 @@ export const useTravelsStore = defineStore('travels', {
             finally {
                 this.$state.loading = false;
             }
+        },
+        setSelectedTravel(travel?: ITravel): void {
+            this.$state.selectedTravel = travel;
         },
     },
 });

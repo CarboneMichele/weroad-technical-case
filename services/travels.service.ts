@@ -8,6 +8,10 @@ class TravelsService {
         });
     }
 
+    async fetchTravelDetails(id: string): Promise<ITravel> {
+        return await $fetch(`/api/travels/${id}`);
+    }
+
     async addTravel(travel: Partial<ITravel>): Promise<ITravel> {
         return await $fetch('/api/travels', {
             method: 'POST',
@@ -18,7 +22,7 @@ class TravelsService {
         });
     }
 
-    async updateTravel(id: string, updatedTravel: ITravel): Promise<void> {
+    async updateTravel(id: string, updatedTravel: Partial<ITravel>): Promise<void> {
         await $fetch(`/api/travels/${id}`, {
             method: 'PUT',
             headers: {

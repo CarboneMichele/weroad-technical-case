@@ -14,7 +14,6 @@ const showAside = ref(false);
             <aside class="absolute md:translate-x-0 md:static h-full duration-150 ease-out w-64 md:w-[200px] bg-gray-200 dark:bg-gray-900 p-4 shadow-lg md:block md:h-auto z-10" :class="{ '-translate-x-full': !showAside, 'block top-0 translate-x-0': showAside }">
                 <BaseNavigationMenu />
             </aside>
-
             <!-- Main Content -->
             <main class="dashboard-content flex-1 p-4 ">
                 <NuxtPage />

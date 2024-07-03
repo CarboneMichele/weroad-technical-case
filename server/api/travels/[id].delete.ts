@@ -1,11 +1,11 @@
 import { defineEventHandler } from 'h3';
-import { deleteTravel } from './data';
+import { deleteTravel } from '../data';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
     const id = event.context.params?.id;
 
     if (id) {
-        deleteTravel(id);
+        await deleteTravel(id);
         return { message: 'Travel deleted successfully' };
     }
     else {

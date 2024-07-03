@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useTravels } from '~/composables/useTravels';
 
-const emit = defineEmits(['toggleTravelCreation']);
+const emit = defineEmits(['toggleTravelCreation', 'rowClick']);
 
 const q = ref('');
 const { travels, error, loading, fetchTravels } = useTravels();
@@ -65,7 +65,7 @@ onMounted(() => {
                 New Travel
             </UButton>
         </div>
-        <UTable :loading="loading" :rows="travels" :columns="columns" @select="() => {}" />
+        <UTable :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)" />
         <p v-if="error" class="text-red-500">
             {{ error.message }}
         </p>

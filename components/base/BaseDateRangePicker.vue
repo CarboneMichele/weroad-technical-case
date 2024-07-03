@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { format, parse } from 'date-fns';
-import { defineEmits, defineProps, ref, toRefs, watch } from 'vue';
+import { format } from 'date-fns';
 
 const props = defineProps<{ modelValue: { start: Date; end: Date } }>();
 const emit = defineEmits(['update:modelValue']);

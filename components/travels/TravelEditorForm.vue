@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { type Duration, format, isSameDay, parseISO, sub } from 'date-fns';
+import { sub } from 'date-fns';
 import type { FormError, FormSubmitEvent } from '#ui/types';
 import type { ITravel } from '~/types/travels/travels.model';
 
+const props = defineProps<{ travel?: ITravel }>();
 const emit = defineEmits(['creationComplete']);
+
 const { dateRange, updateDateRange } = useDateRange(sub(new Date(), { days: 1 }), new Date());
 
-const travelFormModel: Partial<ITravel> = reactive({
+const travelFormModel = ref<Partial<ITravel>>({
     name: '',
     departureDate: dateRange.start.toISOString(),
     returnDate: dateRange.end.toISOString(),
@@ -17,17 +19,25 @@ const travelFormModel: Partial<ITravel> = reactive({
 
 // Date Range management
 function updateTravelTimeFrame(): void {
-    const { start, end } = dateRange;
-    travelFormModel.departureDate = start.toISOString();
-    travelFormModel.returnDate = end.toISOString();
+    travelFormModel.value.departureDate = dateRange.start.toISOString();
+    travelFormModel.value.returnDate = dateRange.end.toISOString();
 }
 
 watch(dateRange, () => {
     updateTravelTimeFrame();
 });
 
+// Edit Logic
+const isEdit = ref(props.travel);
+
+function populateForm(): void {
+    if (props.travel) {
+        travelFormModel.value = { ...props.travel };
+    }
+}
+
 // Submit logic
-const { loading, fetchTravels, addTravel } = useTravels();
+const { loading, fetchTravels, addTravel, updateTravel, fetchTravelDetails } = useTravels();
 
 function validate(state: Partial<ITravel>): FormError[] {
     const requiredFields: (keyof ITravel)[] = ['name', 'returnDate', 'picture', 'price'];
@@ -43,10 +53,22 @@ function validate(state: Partial<ITravel>): FormError[] {
 }
 
 async function onSubmit(form: FormSubmitEvent<Partial<ITravel>>) {
-    await addTravel(form.data);
-    await fetchTravels();
-    emit('creationComplete');
+    if (isEdit.value) {
+        await updateTravel(props.travel?.id as string, form.data);
+        await fetchTravelDetails(props.travel?.id as string);
+    }
+    else {
+        await addTravel(form.data);
+        await fetchTravels();
+        emit('creationComplete');
+    }
 }
+
+onMounted(() => {
+    if (isEdit.value) {
+        populateForm();
+    }
+});
 </script>
 
 <template>
@@ -69,6 +91,7 @@ async function onSubmit(form: FormSubmitEvent<Partial<ITravel>>) {
 
         <UFormGroup label="Picture * " name="picture">
             <BaseFileUpload
+                :base64="travelFormModel.picture"
                 @base64-change="(base64: string) => {
                     travelFormModel.picture = base64;
                 }"

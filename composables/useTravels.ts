@@ -4,22 +4,29 @@ import type { ITravel } from '~/types/travels/travels.model.js';
 
 export function useTravels() {
     const travelStore = useTravelsStore();
-    const { travels, error, loading } = storeToRefs(travelStore);
+    const { travels, error, loading, selectedTravel } = storeToRefs(travelStore);
 
     async function fetchTravels(q?: string) {
         await travelStore.fetchTravels(q);
+    }
+    async function fetchTravelDetails(id: string) {
+        await travelStore.fetchTravelDetails(id);
     }
 
     async function addTravel(travel: Partial<ITravel>) {
         await travelStore.addTravel(travel);
     }
 
-    async function updateTravel(id: string, updatedTravel: ITravel) {
+    async function updateTravel(id: string, updatedTravel: Partial<ITravel>) {
         await travelStore.updateTravel(id, updatedTravel);
     }
 
     async function deleteTravel(id: string) {
         await travelStore.deleteTravel(id);
+    }
+
+    async function setSelectedTravel(travel?: ITravel) {
+        await travelStore.setSelectedTravel(travel);
     }
 
     return {
@@ -30,5 +37,8 @@ export function useTravels() {
         addTravel,
         updateTravel,
         deleteTravel,
+        setSelectedTravel,
+        selectedTravel,
+        fetchTravelDetails,
     };
 }

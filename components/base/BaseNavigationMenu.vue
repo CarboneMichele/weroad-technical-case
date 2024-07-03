@@ -26,7 +26,7 @@ function isActiveRoute(route: RouteRecordNormalized): boolean {
     <nav>
         <ul class="flex flex-col gap-y-1">
             <li v-for="route in topLevelRoutes" :key="route.path">
-                <NuxtLink :to="route.path" class="flex items-center p-2 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-400 rounded-lg transition-colors" :class="{ 'bg-primary-300 dark:bg-primary-500 hover:bg-primary-300 dark:hover:bg-primary-500': isActiveRoute(route) }">
+                <NuxtLink :to="route.name !== currentRoute.name ? { name: route.name } : ''" class="flex items-center p-2 text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-400 rounded-lg transition-colors" :class="{ 'bg-primary-300 dark:bg-primary-500 hover:bg-primary-300 dark:hover:bg-primary-500': isActiveRoute(route) }">
                     <span class="icon">{{ route.meta.icon }}</span>
                     <span class="ml-2 dark:hover:text-accent">{{ route.name }}</span>
                 </NuxtLink>
