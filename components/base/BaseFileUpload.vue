@@ -45,10 +45,10 @@ onBeforeUnmount(() => {
         />
 
         <div v-if="props.base64" class="rounded self-center w-full h-[300px] flex object-contain">
-            <img class="rounded-md shadow-md" :src="`data:${utilsService.getBase64ImageMimeType(props.base64)};base64,${props.base64}`" alt="Preview">
+            <img class="rounded-md shadow-md" :src="`data:${utilsService.getBase64ImageMimeType(props.base64)};base64,${props.base64}`" :alt="$t('COMMON.S10')">
         </div>
         <div v-else-if="previewURL" class="rounded self-center w-full h-[300px] flex object-contain">
-            <img class="rounded-md shadow-md" :src="previewURL" alt="Preview">
+            <img class="rounded-md shadow-md" :src="previewURL" :alt="$t('COMMON.S10')">
         </div>
     </div>
 </template>

@@ -1,0 +1,30 @@
+{
+    "COMMON": {
+        "S01": "Confirm",
+        "S02": "Sure you want to continue?",
+        "S03": "Edit",
+        "S04": "Required",
+        "S05": "Back",
+        "S06": "Submit",
+        "S07": "Home",
+        "S08": "Name",
+        "S09": "Description",
+        "S10": "Preview"
+    },
+    "PROJECT_COMMON": {
+        "S01": "No Travels | Travel | Travels",
+        "S02": "Booking | Bookings",
+        "S03": "Departure Date",
+        "S04": "Return Date",
+        "S05": "Price (€)"
+    },
+    "TRAVELS": {
+        "S01": "Add travel",
+        "S02": "New travel",
+        "S03": "Filter travels",
+        "S04": "Create travel",
+        "S05": "Picture",
+        "S06": "Average user rating",
+        "S07": "Edit Travel"
+    }
+}

@@ -4,42 +4,42 @@ import { ref, watch } from 'vue';
 import { useTravels } from '~/composables/useTravels';
 
 const emit = defineEmits(['toggleTravelCreation', 'rowClick']);
-
+const { t } = useI18n();
 const q = ref('');
 const { travels, error, loading, fetchTravels } = useTravels();
 
-const columns = [
+const columns = computed(() => [
     {
         key: 'name',
-        label: 'Name',
+        label: t('COMMON.S08'),
         sortable: true,
     },
     {
         key: 'departureDate',
-        label: 'Departure Date',
+        label: t('PROJECT_COMMON.S03'),
         sortable: true,
     },
     {
         key: 'returnDate',
-        label: 'Return Date',
+        label: t('PROJECT_COMMON.S04'),
         sortable: true,
     },
     {
         key: 'description',
-        label: 'Description',
+        label: t('COMMON.S09'),
         sortable: true,
     },
     {
         key: 'price',
-        label: 'Price (€)',
+        label: t('PROJECT_COMMON.S05'),
         sortable: true,
     },
     {
         key: 'rating',
-        label: 'Rating',
+        label: t('TRAVELS.S06'),
         sortable: true,
     },
-];
+]);
 
 watch(q, () => {
     fetchTravels(q.value);
@@ -61,22 +61,22 @@ onMounted(() => {
         }"
     >
         <div class="flex px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
-            <UInput v-model="q" placeholder="Filter travels..." />
+            <UInput v-model="q" :placeholder="t('TRAVELS.S03')" />
             <UButton class="ml-auto" @click="emit('toggleTravelCreation')">
-                New Travel
+                {{ t('TRAVELS.S02') }}
             </UButton>
         </div>
         <UTable :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)">
             <template #departureDate-data="{ row }">
-                <span> {{ format(new Date(row.departureDate), 'MM/dd/yyyy') }}</span>
+                <span> {{ format(new Date(row.departureDate), 'dd/MM/yyyy') }}</span>
             </template>
             <template #returnDate-data="{ row }">
-                <span> {{ format(new Date(row.returnDate), 'MM/dd/yyyy') }}</span>
+                <span> {{ format(new Date(row.returnDate), 'dd/MM/yyyy') }}</span>
             </template>
 
             <template #empty-state>
                 <div class="flex flex-col items-center justify-center py-6 gap-3">
-                    <span class="italic text-sm">0 travels!</span>
+                    <span class="italic text-sm">{{ t('PROJECT_COMMON.S01', 0) }}</span>
                     <UButton label="Add travel" @click="emit('toggleTravelCreation')" />
                 </div>
             </template>

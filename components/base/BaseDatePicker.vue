@@ -3,12 +3,7 @@ import { DatePicker as VCalendarDatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 import type { DatePickerDate, DatePickerRangeObject } from 'v-calendar/dist/types/src/use/datePicker.js';
 
-const props = defineProps({
-    modelValue: {
-        type: [Date, Object] as PropType<DatePickerDate | DatePickerRangeObject | null>,
-        default: null,
-    },
-});
+const props = defineProps<{ modelValue: DatePickerDate | DatePickerRangeObject | null }>();
 
 const emit = defineEmits(['update:model-value', 'close']);
 

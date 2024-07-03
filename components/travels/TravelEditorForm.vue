@@ -6,6 +6,8 @@ import type { ITravel } from '~/types/travels/travels.model';
 const props = defineProps<{ travel?: ITravel }>();
 const emit = defineEmits(['creationComplete']);
 
+const { t } = useI18n();
+
 const { dateRange, updateDateRange } = useDateRange(sub(new Date(), { days: 1 }), new Date());
 
 const travelFormModel = ref<Partial<ITravel>>({
@@ -45,7 +47,7 @@ function validate(state: Partial<ITravel>): FormError[] {
 
     requiredFields.forEach((field) => {
         if (!state[field]) {
-            errors.push({ path: field, message: 'Required' });
+            errors.push({ path: field, message: t('COMMON.S04') });
         }
     });
 
@@ -73,23 +75,23 @@ onMounted(() => {
 
 <template>
     <UForm :validate="validate" :validate-on="['submit']" :state="travelFormModel" class="flex flex-col gap-y-3" @submit="onSubmit">
-        <UFormGroup label="Name" name="name" required>
+        <UFormGroup :label="t('COMMON.S08')" name="name" required>
             <UInput v-model="travelFormModel.name" />
         </UFormGroup>
 
-        <UFormGroup label="Description" name="description">
+        <UFormGroup :label="t('COMMON.S09')" name="description">
             <UTextarea v-model="travelFormModel.description" :rows="1" autoresize />
         </UFormGroup>
 
-        <UFormGroup label="TimeFrame" required>
+        <UFormGroup :label="`${t('PROJECT_COMMON.S03')}/${t('PROJECT_COMMON.S04')}`" required>
             <BaseDateRangePicker :model-value="dateRange" @update:model-value="updateDateRange($event)" />
         </UFormGroup>
 
-        <UFormGroup label="Price (€)" required name="price">
+        <UFormGroup :label="t('PROJECT_COMMON.S05')" required name="price">
             <UInput v-model="travelFormModel.price" type="number" />
         </UFormGroup>
 
-        <UFormGroup label="Picture" name="picture" required>
+        <UFormGroup :label="t('TRAVELS.S05')" name="picture" required>
             <BaseFileUpload
                 :base64="travelFormModel.picture"
                 @base64-change="(base64: string) => {
@@ -99,7 +101,7 @@ onMounted(() => {
         </UFormGroup>
 
         <UButton type="submit" class="mt-4 w-fit ml-auto" :loading="loading">
-            Submit
+            {{ t('COMMON.S06') }}
         </UButton>
     </UForm>
 </template>

@@ -55,7 +55,7 @@ onBeforeUnmount(() => {
 
             <div class="flex gap-2">
                 <UButton class="grow-0" icon="i-heroicons-pencil" @click="showEditModal = true">
-                    Edit
+                    {{ $t('COMMON.S03') }}
                 </UButton>
 
                 <BasePopConfirm :show="showDeleteConfirmation" @update:show="showDeleteConfirmation = $event" @negative="showDeleteConfirmation = false" @positive="handleTravelDelete(selectedTravel.id)">
@@ -69,16 +69,16 @@ onBeforeUnmount(() => {
                 </BasePopConfirm>
             </div>
         </div>
-        <BaseFieldDetail label="Description" :value="selectedTravel.description" />
+        <BaseFieldDetail :label="$t('COMMON.S09')" :value="selectedTravel.description" />
 
         <div class="flex gap-6">
-            <BaseFieldDetail label="Departure" :value=" format(new Date(selectedTravel.departureDate), 'MM/dd/yyyy')" />
-            <BaseFieldDetail label="Return" :value=" format(new Date(selectedTravel.returnDate), 'MM/dd/yyyy')" />
+            <BaseFieldDetail :label="$t('PROJECT_COMMON.S03')" :value=" format(new Date(selectedTravel.departureDate), 'dd/MM/yyyy')" />
+            <BaseFieldDetail :label="$t('PROJECT_COMMON.S04')" :value=" format(new Date(selectedTravel.returnDate), 'dd/MM/yyyy')" />
         </div>
 
-        <BaseFieldDetail label="Price (€)" :value="selectedTravel.price" />
+        <BaseFieldDetail :label="$t('PROJECT_COMMON.S05')" :value="selectedTravel.price" />
 
-        <BaseFieldDetail label="Average user rating" :value="selectedTravel.rating || '-'" />
+        <BaseFieldDetail :label="$t('TRAVELS.S06')" :value="selectedTravel.rating || '-'" />
     </div>
     <UModal v-model="showEditModal">
         <UCard
@@ -94,7 +94,7 @@ onBeforeUnmount(() => {
             <template #header>
                 <div class="flex items-center justify-between">
                     <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-                        Edit Travel
+                        {{ $t('TRAVELS.S07') }}
                     </h3>
                     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="showEditModal = false" />
                 </div>

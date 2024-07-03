@@ -28,10 +28,10 @@ function handleConfirm() {
 
         <template #panel>
             <div class="p-4">
-                <p>Sure you want to continue?</p>
+                <p>{{ $t('COMMON.S02') }}</p>
                 <div class="flex justify-end mt-4 gap-2">
-                    <UButton color="white" label="Cancel" @click="handleCancel" />
-                    <UButton color="primary" label="Confirm" @click="handleConfirm" />
+                    <UButton color="white" :label="$t('COMMON.S05')" @click="handleCancel" />
+                    <UButton color="primary" :label="$t('COMMON.S01')" @click="handleConfirm" />
                 </div>
             </div>
         </template>
