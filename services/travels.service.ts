@@ -3,39 +3,25 @@ import type { ITravel } from '~/types/travels/travels.model.js';
 
 class TravelsService {
     async fetchTravels(q?: string): Promise<ITravel[]> {
-        return await $fetch('/api/travels', {
+        return await useCustomFetch().get('/travels', {
             query: { q },
         });
     }
 
     async fetchTravelDetails(id: string): Promise<ITravel> {
-        return await $fetch(`/api/travels/${id}`);
+        return await useCustomFetch().get(`/travels/${id}`);
     }
 
     async addTravel(travel: Partial<ITravel>): Promise<ITravel> {
-        return await $fetch('/api/travels', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: travel,
-        });
+        return await useCustomFetch().post('/api/travels', travel);
     }
 
     async updateTravel(id: string, updatedTravel: Partial<ITravel>): Promise<void> {
-        await $fetch(`/api/travels/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: updatedTravel,
-        });
+        await useCustomFetch().put(`/api/travels/${id}`, updatedTravel);
     }
 
     async deleteTravel(id: string): Promise<void> {
-        await $fetch(`/api/travels/${id}`, {
-            method: 'DELETE',
-        });
+        await useCustomFetch().del(`/api/travels/${id}`);
     }
 }
 

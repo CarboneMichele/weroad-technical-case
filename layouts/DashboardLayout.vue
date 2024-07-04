@@ -24,7 +24,7 @@ const showAside = ref(false);
 
 <style scoped lang="scss">
     .dashboard-content {
-        max-height: calc(100vh - 104px);
+        max-height: calc(100vh - 80px);
         overflow: auto;
     }
 </style>

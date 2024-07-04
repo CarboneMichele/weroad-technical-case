@@ -11,7 +11,6 @@ async function goToTravelDetail(travel: ITravel): Promise<void> {
 </script>
 
 <template>
-    <BaseBreadcrumbs />
     <TravelsDataTable
         @toggle-travel-creation="showTravelCreationModal = true" @row-click="goToTravelDetail($event)"
     />

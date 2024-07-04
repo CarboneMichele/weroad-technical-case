@@ -5,4 +5,5 @@
     <NuxtLayout name="dashboard-layout">
         <NuxtPage />
     </NuxtLayout>
+    <UNotifications />
 </template>

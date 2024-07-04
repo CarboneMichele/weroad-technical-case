@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
-import { ref, watch } from 'vue';
 import { useTravels } from '~/composables/useTravels';
 
 const emit = defineEmits(['toggleTravelCreation', 'rowClick']);

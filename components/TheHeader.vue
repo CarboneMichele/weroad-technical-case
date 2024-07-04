@@ -9,7 +9,6 @@ const emit = defineEmits(['toggle-menu']);
                 <h1 class="text-xl font-bold">
                     YOLO Travel Manager
                 </h1>
-                <BaseBreadcrumbs />
             </div>
             <div class="flex items-center space-x-4">
                 <ColorScheme>

@@ -4,6 +4,11 @@ export default <RouterConfig> {
     // https://router.vuejs.org/api/interfaces/routeroptions.html#routes
     routes: _routes => [
         {
+            path: '/:catchAll(.*)*',
+            redirect: { name: 'home' },
+            props: true,
+        },
+        {
             path: '/',
             name: 'home',
             component: () => import('~/pages/index.vue'),

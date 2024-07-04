@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref } from 'vue';
 import { utilsService } from '~/services/utils.service';
 
 const props = defineProps<{ base64?: string }>();

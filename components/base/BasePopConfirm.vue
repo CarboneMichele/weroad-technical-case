@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineEmits, ref } from 'vue';
-
 const props = defineProps<{ show: boolean }>();
 const emits = defineEmits(['positive', 'negative', 'update:show']);
 
