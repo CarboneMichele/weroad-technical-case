@@ -1,5 +1,12 @@
+import { format, isValid } from 'date-fns';
+
 class UtilsService {
-    //* **FILES***
+    //* * DATES */
+    getFormattedDate(dateStr: string, stringFormat = 'dd/MM/yyyy'): string {
+        return isValid(new Date(dateStr)) ? format(new Date(dateStr), stringFormat) : '-';
+    }
+
+    //* *FILES *
     base64ToBlob(base64: string) {
         const contentType = 'application/octet-stream';
 

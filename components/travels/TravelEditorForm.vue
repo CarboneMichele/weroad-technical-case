@@ -35,6 +35,10 @@ const isEdit = ref(props.travel);
 function populateForm(): void {
     if (props.travel) {
         travelFormModel.value = { ...props.travel };
+        updateDateRange(
+            { start: new Date(travelFormModel.value.departureDate as string), end: new Date(travelFormModel.value.returnDate as string),
+            },
+        );
     }
 }
 

@@ -13,7 +13,7 @@ const selected = ref<{ start: Date; end: Date }>({
 
 watch(modelValue, (newVal) => {
     selected.value = newVal;
-});
+}, { deep: true });
 
 watch(selected, (newVal) => {
     emit('update:modelValue', {

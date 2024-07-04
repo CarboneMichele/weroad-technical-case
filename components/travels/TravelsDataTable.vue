@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { format } from 'date-fns';
 import { useTravels } from '~/composables/useTravels';
+import { utilsService } from '~/services/utils.service';
 
 const emit = defineEmits(['toggleTravelCreation', 'rowClick']);
 const { t } = useI18n();
@@ -67,10 +67,10 @@ onMounted(() => {
         </div>
         <UTable :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)">
             <template #departureDate-data="{ row }">
-                <span> {{ format(new Date(row.departureDate), 'dd/MM/yyyy') }}</span>
+                <span>{{ utilsService.getFormattedDate(row.departureDate) }}</span>
             </template>
             <template #returnDate-data="{ row }">
-                <span> {{ format(new Date(row.returnDate), 'dd/MM/yyyy') }}</span>
+                <span>{{ utilsService.getFormattedDate(row.returnDate) }}</span>
             </template>
 
             <template #empty-state>
