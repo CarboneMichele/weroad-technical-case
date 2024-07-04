@@ -5,7 +5,7 @@ import { utilsService } from '~/services/utils.service';
 const emit = defineEmits(['toggleTravelCreation', 'rowClick']);
 const { t } = useI18n();
 const q = ref('');
-const { travels, error, loading, fetchTravels } = useTravels();
+const { travels, loading, fetchTravels } = useTravels();
 
 const columns = computed(() => [
     {
@@ -80,9 +80,6 @@ onMounted(() => {
                 </div>
             </template>
         </UTable>
-        <p v-if="error" class="text-red-500">
-            {{ error.message }}
-        </p>
     </UCard>
 </template>
 

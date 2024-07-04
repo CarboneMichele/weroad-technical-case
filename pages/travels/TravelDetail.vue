@@ -27,8 +27,13 @@ async function handleTravelDelete(travelID: string): Promise<void> {
     await navigateTo({ name: 'travels' });
 }
 
-onMounted(async () => {
-    await fetchTravelDetails(routeID.value);
+onBeforeMount(async () => {
+    try {
+        await fetchTravelDetails(routeID.value);
+    }
+    catch (e) {
+        await navigateTo({ name: 'travels' });
+    }
 });
 
 onBeforeUnmount(() => {
@@ -39,7 +44,7 @@ onBeforeUnmount(() => {
 <template>
     <div v-if="loading || !selectedTravel" class="space-y-2">
         <USkeleton class="h-[200px] w-full  bg-gray-300" />
-        <USkeleton class="h-4 w-[400px]  bg-gray-300" />
+        <USkeleton class="h-4 w-[150]  md:w-[400px]  bg-gray-300" />
         <USkeleton class="h-4 w-[180px] bg-gray-300" />
         <USkeleton class="h-4 w-[300px]  bg-gray-300" />
         <USkeleton class="h-4 w-[250px] bg-gray-300" />

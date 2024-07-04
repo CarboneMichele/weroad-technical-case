@@ -4,8 +4,8 @@ export function useCustomFetch() {
     const nuxtApp = useNuxtApp();
     const customFetch = nuxtApp.$customFetch as $Fetch;
 
-    async function get<T>(url: string, params?: Record<string, any>): Promise<T> {
-        return customFetch(url, {
+    async function get<T>(url: string, params?: Record<string, any>): Promise<T > {
+        return await customFetch(url, {
             method: 'GET',
             ...params,
         });

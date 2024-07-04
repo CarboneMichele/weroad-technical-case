@@ -6,50 +6,44 @@ export const useTravelsStore = defineStore('travels', {
     state: (): ITravelsStoreState => ({
         travels: [],
         selectedTravel: undefined,
-        error: null,
         loading: false,
     }),
     actions: {
         async fetchTravels(q?: string): Promise<void> {
-            this.$state.loading = true;
+            this.setLoading(true);
             try {
-                this.travels = await travelsService.fetchTravels(q);
+                const response = await travelsService.fetchTravels(q);
+                this.$state.travels = response;
             }
-            catch (err) {
-                this.$state.error = err as Error;
-            }
+
             finally {
-                this.$state.loading = false;
+                this.setLoading();
             }
         },
-        async fetchTravelDetails(id: string): Promise<void> {
-            this.$state.loading = true;
+        async fetchTravelDetails(id: string): Promise<void | ITravel> {
+            this.setLoading(true);
             try {
                 const currentTravel = await travelsService.fetchTravelDetails(id);
                 this.setSelectedTravel(currentTravel);
-            }
-            catch (err) {
-                this.$state.error = err as Error;
+                return currentTravel;
             }
             finally {
-                this.$state.loading = false;
+                this.setLoading();
             }
         },
         async addTravel(travel: Partial<ITravel>): Promise<void> {
-            this.$state.loading = true;
+            this.setLoading(true);
             try {
                 const newTravel = await travelsService.addTravel(travel);
                 this.travels.push(newTravel);
             }
-            catch (err) {
-                this.$state.error = err as Error;
-            }
+
             finally {
-                this.$state.loading = false;
+                this.setLoading();
             }
         },
         async updateTravel(id: string, updatedTravel: Partial<ITravel>): Promise<void> {
-            this.$state.loading = true;
+            this.setLoading(true);
             try {
                 await travelsService.updateTravel(id, updatedTravel);
                 const index = this.travels.findIndex(travel => travel.id === id);
@@ -57,28 +51,27 @@ export const useTravelsStore = defineStore('travels', {
                     this.travels[index] = { ...this.travels[index], ...updatedTravel };
                 }
             }
-            catch (err) {
-                this.$state.error = err as Error;
-            }
+
             finally {
-                this.$state.loading = false;
+                this.setLoading();
             }
         },
         async deleteTravel(id: string): Promise<void> {
-            this.$state.loading = true;
+            this.setLoading(true);
             try {
                 await travelsService.deleteTravel(id);
                 this.travels = this.travels.filter(travel => travel.id !== id);
             }
-            catch (err) {
-                this.$state.error = err as Error;
-            }
+
             finally {
-                this.$state.loading = false;
+                this.setLoading();
             }
         },
         setSelectedTravel(travel?: ITravel): void {
             this.$state.selectedTravel = travel;
+        },
+        setLoading(loading = false): void {
+            this.$state.loading = loading;
         },
     },
 });

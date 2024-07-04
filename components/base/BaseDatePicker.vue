@@ -2,6 +2,7 @@
 import { DatePicker as VCalendarDatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 import type { DatePickerDate, DatePickerRangeObject } from 'v-calendar/dist/types/src/use/datePicker.js';
+import { useScreens } from 'vue-screen-utils';
 
 const props = defineProps<{ modelValue: DatePickerDate | DatePickerRangeObject | null }>();
 
@@ -22,10 +23,14 @@ const attrs = {
     'is-dark': { selector: 'html', darkClass: 'dark' },
     'first-day-of-week': 2,
 };
+
+// Responsive layout
+const { mapCurrent } = useScreens({ xs: '0px', sm: '640px', md: '768px', lg: '1024px' });
+const columns = mapCurrent({ lg: 2 }, 1);
 </script>
 
 <template>
-    <VCalendarDatePicker v-if="date && (typeof date === 'object')" v-model.range="date" :columns="2" v-bind="{ ...attrs, ...$attrs }" />
+    <VCalendarDatePicker v-if="date && (typeof date === 'object')" v-model.range="date" :columns="columns" v-bind="{ ...attrs, ...$attrs }" />
     <VCalendarDatePicker v-else v-model="date" v-bind="{ ...attrs, ...$attrs }" />
 </template>
 

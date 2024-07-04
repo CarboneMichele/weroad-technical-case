@@ -11,9 +11,7 @@ const emit = defineEmits(['toggle-menu']);
                 </h1>
             </div>
             <div class="flex items-center space-x-4">
-                <ColorScheme>
-                    <USelect v-model="$colorMode.preference" :options="['system', 'light', 'dark']" />
-                </ColorScheme>
+                <BaseThemeToggle />
                 <!-- Hamburger Menu -->
                 <button class="md:hidden focus:outline-none" @click="emit('toggle-menu')">
                     <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

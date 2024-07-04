@@ -4,13 +4,13 @@ import type { ITravel } from '~/types/travels/travels.model.js';
 
 export function useTravels() {
     const travelStore = useTravelsStore();
-    const { travels, error, loading, selectedTravel } = storeToRefs(travelStore);
+    const { travels, loading, selectedTravel } = storeToRefs(travelStore);
 
     async function fetchTravels(q?: string) {
         await travelStore.fetchTravels(q);
     }
-    async function fetchTravelDetails(id: string) {
-        await travelStore.fetchTravelDetails(id);
+    async function fetchTravelDetails(id: string): Promise<void | ITravel> {
+        return await travelStore.fetchTravelDetails(id);
     }
 
     async function addTravel(travel: Partial<ITravel>) {
@@ -31,7 +31,6 @@ export function useTravels() {
 
     return {
         travels,
-        error,
         loading,
         fetchTravels,
         addTravel,
