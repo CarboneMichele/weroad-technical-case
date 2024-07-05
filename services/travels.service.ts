@@ -13,15 +13,15 @@ class TravelsService {
     }
 
     async addTravel(travel: Partial<ITravel>): Promise<ITravel> {
-        return await useCustomFetch().post('/api/travels', travel);
+        return await useCustomFetch().post('/travels', travel);
     }
 
     async updateTravel(id: string, updatedTravel: Partial<ITravel>): Promise<void> {
-        await useCustomFetch().put(`/api/travels/${id}`, updatedTravel);
+        await useCustomFetch().put(`/travels/${id}`, updatedTravel);
     }
 
     async deleteTravel(id: string): Promise<void> {
-        await useCustomFetch().del(`/api/travels/${id}`);
+        await useCustomFetch().del(`/travels/${id}`);
     }
 }
 

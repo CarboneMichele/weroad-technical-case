@@ -19,7 +19,7 @@ onClickOutside(aside, () => showAside.value = false);
                 <BaseNavigationMenu />
             </aside>
             <!-- Main Content -->
-            <main class="dashboard-content flex-1 p-4 ">
+            <main class="dashboard-content flex-1 p-4 container mx-auto ">
                 <NuxtPage />
             </main>
         </div>

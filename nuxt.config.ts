@@ -30,4 +30,10 @@ export default defineNuxtConfig({
         langDir: 'lang',
         defaultLocale: 'en',
     },
+    runtimeConfig: {
+        public: {
+            // eslint-disable-next-line node/prefer-global/process
+            baseURL: process.env.NUXT_PUBLIC_API_BASE_URL || '/api',
+        },
+    },
 });

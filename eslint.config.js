@@ -7,5 +7,8 @@ export default antfu({
         quotes: 'single',
         semi: true,
     },
+    javascript: {
+        node: true,
+    },
 
 });

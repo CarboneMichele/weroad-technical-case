@@ -42,23 +42,21 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+    <BaseBackButton class="mb-3" back-route-name="travels" :label="$t('PROJECT_COMMON.S01', 2)" />
     <div v-if="loading || !selectedTravel" class="space-y-2">
-        <USkeleton class="h-[200px] w-full  bg-gray-300" />
-        <USkeleton class="h-4 w-[150]  md:w-[400px]  bg-gray-300" />
-        <USkeleton class="h-4 w-[180px] bg-gray-300" />
-        <USkeleton class="h-4 w-[300px]  bg-gray-300" />
-        <USkeleton class="h-4 w-[250px] bg-gray-300" />
+        <USkeleton class="h-4 w-[150]  md:w-[400px]  bg-gray-300 dark:bg-gray-100" />
+        <USkeleton class="h-[200px] w-full  bg-gray-300 dark:bg-gray-100" />
+        <USkeleton class="h-4 w-[180px] bg-gray-300 dark:bg-gray-100" />
+        <USkeleton class="h-4 w-[300px]  bg-gray-300 dark:bg-gray-100" />
+        <USkeleton class="h-4 w-[250px] bg-gray-300 dark:bg-gray-100" />
     </div>
     <div v-else class="flex flex-col space-y-2">
-        <div class="h-[200px] w-full flex">
-            <img class="rounded-md shadow-sm w-full h-full block object-cover" :src="pictureURL" alt="Preview">
-        </div>
         <div class="w-full flex justify-between align-top">
-            <p class="font-bold text-lg">
+            <p class="font-bold text-3xl">
                 {{ selectedTravel.name }}
             </p>
 
-            <div class="flex gap-2">
+            <div class="flex gap-2 items-center">
                 <UButton class="grow-0" icon="i-heroicons-pencil" @click="showEditModal = true">
                     {{ $t('COMMON.S03') }}
                 </UButton>
@@ -74,6 +72,10 @@ onBeforeUnmount(() => {
                 </BasePopConfirm>
             </div>
         </div>
+        <div class="h-[200px] w-full flex">
+            <img class="rounded-md shadow-sm w-full h-full block object-cover" :src="pictureURL" alt="Preview">
+        </div>
+
         <BaseFieldDetail :label="$t('COMMON.S09')" :value="selectedTravel.description" />
 
         <div class="flex gap-6">

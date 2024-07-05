@@ -2,9 +2,11 @@ import { type $Fetch, $fetch, type FetchResponse, type IFetchError } from 'ofetc
 
 export default defineNuxtPlugin(() => {
     const toast = useToast();
+    const config = useRuntimeConfig();
 
     const $customFetch: $Fetch = $fetch.create({
-        baseURL: '/api',
+
+        baseURL: config.public.baseURL,
         onResponse({ response }) {
             return response._data;
         },
