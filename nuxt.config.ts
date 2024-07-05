@@ -36,4 +36,5 @@ export default defineNuxtConfig({
             baseURL: process.env.NUXT_PUBLIC_API_BASE_URL || '/api',
         },
     },
+
 });

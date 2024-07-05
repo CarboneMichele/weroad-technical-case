@@ -1,4 +1,6 @@
 import { format, isValid } from 'date-fns';
+import type { ComposerTranslation } from 'vue-i18n';
+import type { ISelectOption } from '~/types/ui/selectOption.model';
 
 class UtilsService {
     //* * DATES */
@@ -39,6 +41,18 @@ class UtilsService {
         else {
             return 'file.unknown';
         }
+    }
+
+    // ENUMS - SELECT
+    getDropdownOptions(enumProp: any, i18nKey: string, translationInstance: ComposerTranslation): ISelectOption[] {
+        const options: ISelectOption[] = [];
+        for (const option in enumProp) {
+            options.push({
+                label: translationInstance(`${i18nKey}_${option}`),
+                value: enumProp[option],
+            });
+        }
+        return options;
     }
 }
 

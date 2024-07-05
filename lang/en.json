@@ -9,7 +9,18 @@
         "S07": "Home",
         "S08": "Name",
         "S09": "Description",
-        "S10": "Preview"
+        "S10": "Last name",
+        "S11": "First name",
+        "S12": "Age",
+        "S13": "Gender",
+        "S14": "Email",
+        "S15": "Invalid email",
+        "S16": "Other",
+        "S17": "Next",
+        "S18": "Previous",
+        "S19": "Ok",
+        "S20": "Phone number",
+        "S21": "Invalid Phone number"
     },
     "PROJECT_COMMON": {
         "S01": "No Travels | Travel | Travels",
@@ -17,7 +28,8 @@
         "S03": "Departure Date",
         "S04": "Return Date",
         "S05": "Price (€)",
-        "S06": "Customer"
+        "S06": "No Customers | Customer | Customers",
+        "S07": "Fill with some infos"
     },
     "TRAVELS": {
         "S01": "Add travel",
@@ -26,12 +38,21 @@
         "S04": "Create travel",
         "S05": "Picture",
         "S06": "Average user rating",
-        "S07": "Edit Travel"
+        "S07": "Edit Travel",
+        "S08": "Select a travel"
     },
     "BOOKINGS": {
         "S01": "Add booking",
         "S02": "New booking",
         "S03": "Filter bookings",
-        "S04": "Create booking"
+        "S04": "Create booking",
+        "S05": "Payment",
+        "S06": "Select a payment method"
+    },
+    "ENUMS": {
+        "GENDER_MALE": "Male",
+        "GENDER_FEMALE": "Female",
+        "GENDER_OTHER": "Other"
+
     }
 }

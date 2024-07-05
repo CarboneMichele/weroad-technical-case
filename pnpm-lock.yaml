@@ -23,6 +23,9 @@ importers:
       v-calendar:
         specifier: ^3.1.2
         version: 3.1.2(@popperjs/core@2.11.8)(vue@3.4.31(typescript@5.5.2))
+      vue3-form-wizard:
+        specifier: ^0.2.4
+        version: 0.2.4
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.21.2
@@ -4956,6 +4959,9 @@ packages:
     resolution: {integrity: sha512-EJ/8TANKhFj+LefDuOvZykwMr3rrLFPLNb++lNBqPOpVigT2ActRg6icH9RFQVm4nHwlHIHSGm5OY/Clar9yIg==}
     peerDependencies:
       vue: ^3.2.0
+
+  vue3-form-wizard@0.2.4:
+    resolution: {integrity: sha512-muf+lxSCSv0Yl9mu5OT6+cdROQ4nZdKuaHhiaazDVSiLWKEmX5wOcKwXhXG7mqaTg8q25u4J34kBvVuVzGSIXw==}
 
   vue@3.4.31:
     resolution: {integrity: sha512-njqRrOy7W3YLAlVqSKpBebtZpDVg21FPoaq1I7f/+qqBThK9ChAIjkRWgeP6Eat+8C+iia4P3OYqpATP21BCoQ==}
@@ -10653,6 +10659,8 @@ snapshots:
   vue-screen-utils@1.0.0-beta.13(vue@3.4.31(typescript@5.5.2)):
     dependencies:
       vue: 3.4.31(typescript@5.5.2)
+
+  vue3-form-wizard@0.2.4: {}
 
   vue@3.4.31(typescript@5.5.2):
     dependencies:

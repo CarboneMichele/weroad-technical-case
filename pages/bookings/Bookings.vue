@@ -14,7 +14,11 @@ async function goToBookingDetail(booking: IBooking): Promise<void> {
     <BookingsDataTable
         @toggle-booking-creation="showBookingCreationModal = true" @row-click="goToBookingDetail($event)"
     />
-    <UModal v-model="showBookingCreationModal">
+    <UModal
+        v-model="showBookingCreationModal" :ui="{
+            width: 'md:max-w-[1200px]',
+        }"
+    >
         <UCard
             :ui="{
                 base: 'h-full flex flex-col',
@@ -33,6 +37,8 @@ async function goToBookingDetail(booking: IBooking): Promise<void> {
                     <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="showBookingCreationModal = false" />
                 </div>
             </template>
+
+            <BookingCreationWizard />
         </UCard>
     </UModal>
 </template>
