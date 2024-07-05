@@ -1,4 +1,3 @@
-// services/travelService.ts
 import type { ITravel } from '~/types/travels/travels.model.js';
 
 class TravelsService {

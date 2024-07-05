@@ -13,10 +13,11 @@
     },
     "PROJECT_COMMON": {
         "S01": "No Travels | Travel | Travels",
-        "S02": "Booking | Bookings",
+        "S02": "No Bookings | Booking | Bookings",
         "S03": "Departure Date",
         "S04": "Return Date",
-        "S05": "Price (€)"
+        "S05": "Price (€)",
+        "S06": "Customer"
     },
     "TRAVELS": {
         "S01": "Add travel",
@@ -26,5 +27,11 @@
         "S05": "Picture",
         "S06": "Average user rating",
         "S07": "Edit Travel"
+    },
+    "BOOKINGS": {
+        "S01": "Add booking",
+        "S02": "New booking",
+        "S03": "Filter bookings",
+        "S04": "Create booking"
     }
 }

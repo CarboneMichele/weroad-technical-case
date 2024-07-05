@@ -31,5 +31,10 @@ export default <RouterConfig> {
             component: () => import('~/pages/bookings/Bookings.vue'),
             meta: { icon: 'book-open' },
         },
+        {
+            path: '/bookings/:id',
+            name: 'booking',
+            component: () => import('~/pages/bookings/BookingDetail.vue'),
+        },
     ],
 };

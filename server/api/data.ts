@@ -1,14 +1,16 @@
 // server/data.ts
 import { v4 as uuidv4 } from 'uuid';
 import type { ITravel } from '../../types/travels/travels.model';
-
-let travels: ITravel[] = [];
+import type { IBooking } from '~/types/bookings/bookings.model';
 
 function delay(milliseconds: number = 1000): Promise<void> {
     return new Promise((resolve) => {
         setTimeout(resolve, milliseconds);
     });
 }
+
+// TRAVELS
+let travels: ITravel[] = [];
 
 export async function getTravels(): Promise<ITravel[]> {
     await delay(1000);
@@ -38,4 +40,19 @@ export async function updateTravel(updatedTravel: ITravel, id?: string) {
 export async function deleteTravel(id: string) {
     await delay(1000);
     travels = travels.filter(travel => travel.id !== id);
+}
+
+// BOOKINGS
+
+const bookings: IBooking[] = [];
+
+export async function getBookings(): Promise<IBooking[]> {
+    await delay(1000);
+    return bookings;
+};
+
+export async function getBookingById(id: string): Promise<IBooking | undefined> {
+    const allBookings = await getBookings();
+    await delay(1000);
+    return allBookings.find(bookings => bookings.id === id);
 }
