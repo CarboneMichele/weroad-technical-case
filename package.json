@@ -1,0 +1,45 @@
+{
+    "name": "nuxt-app",
+    "type": "module",
+    "private": true,
+    "packageManager": "pnpm@9.4.0",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "prepare": "husky install",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "dependencies": {
+        "@pinia/nuxt": "^0.5.1",
+        "date-fns": "^3.6.0",
+        "pinia": "^2.1.7",
+        "uuid": "^10.0.0",
+        "v-calendar": "^3.1.2"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^2.21.2",
+        "@nuxt/devtools": "latest",
+        "@nuxt/ui": "^2.17.0",
+        "@nuxtjs/i18n": "^8.3.1",
+        "@nuxtjs/tailwindcss": "^6.12.0",
+        "@types/uuid": "^10.0.0",
+        "@vueuse/core": "^10.11.0",
+        "@vueuse/nuxt": "^10.11.0",
+        "eslint": "9.6.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^15.2.7",
+        "nuxt": "^3.12.2",
+        "sass": "^1.77.6",
+        "simple-git-hooks": "^2.11.1"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged"
+    },
+    "lint-staged": {
+        "*": "eslint --fix"
+    }
+}

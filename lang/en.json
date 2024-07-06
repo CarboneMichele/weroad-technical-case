@@ -1,0 +1,70 @@
+{
+    "COMMON": {
+        "S01": "Confirm",
+        "S02": "Sure you want to continue?",
+        "S03": "Edit",
+        "S04": "Required",
+        "S05": "Back",
+        "S06": "Submit",
+        "S07": "Home",
+        "S08": "Name",
+        "S09": "Description",
+        "S10": "Last name",
+        "S11": "First name",
+        "S12": "Age",
+        "S13": "Gender",
+        "S14": "Email",
+        "S15": "Invalid email",
+        "S16": "Other",
+        "S17": "Next",
+        "S18": "Previous",
+        "S19": "Ok",
+        "S20": "Phone number",
+        "S21": "Invalid Phone number",
+        "S22": "Additional notes",
+        "S23": "You must be at least 18",
+        "S24": "Finalize"
+
+    },
+    "BRAND": {
+        "S01": "YOLO"
+    },
+    "PROJECT_COMMON": {
+        "S01": "No Travels | Travel | Travels",
+        "S02": "No Bookings | Booking | Bookings",
+        "S03": "Departure Date",
+        "S04": "Return Date",
+        "S05": "Price (€)",
+        "S06": "No Customers | Customer | Customers",
+        "S07": "Fill with some infos"
+    },
+    "TRAVELS": {
+        "S01": "Add travel",
+        "S02": "New travel",
+        "S03": "Filter travels",
+        "S04": "Create travel",
+        "S05": "Picture",
+        "S06": "Average user rating",
+        "S07": "Edit Travel",
+        "S08": "Select a travel",
+        "S09": "Search for a travel"
+    },
+    "BOOKINGS": {
+        "S01": "Add booking",
+        "S02": "New booking",
+        "S03": "Filter bookings",
+        "S04": "Create booking",
+        "S05": "Payment",
+        "S06": "Select a payment method",
+        "S07": "Review",
+        "S08": "Review booking informations"
+    },
+    "ENUMS": {
+        "GENDER_MALE": "Male",
+        "GENDER_FEMALE": "Female",
+        "GENDER_OTHER": "Other",
+        "PAYMENT_PAYPAL": "PayPal",
+        "PAYMENT_REVOLUT": "Revolut",
+        "PAYMENT_CREDIT": "Credit card"
+    }
+}
