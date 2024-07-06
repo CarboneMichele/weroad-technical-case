@@ -1,19 +1,17 @@
-```markdown
 # 🏖️ YoloTravel: Travel and Booking Management System
 
-Welcome to YoloTravel, your go-to travel and booking management system! This project is built using the latest technologies to ensure a smooth and efficient user experience.
+Welcome to YoloTravel, your go-to travel and booking management system!
 
 ## 🚀 Project Description
 
 YoloTravel simplifies the process of managing travels and bookings. It includes two main sections:
 
 1. **Travel Management**:
-   - Displays comprehensive travel details such as names, dates, images, descriptions, prices, and ratings.
-   - Offers a filtered table view for easy browsing.
+   - Displays comprehensive travel details.
    - Provides functionality to add, edit, and delete travel entries.
 
 2. **Booking Management**:
-   - Showcases booking information, including travel details, customer data, payment methods, and notes.
+   - Showcases booking information.
    - Features a multi-step form for booking creation, guiding the user through travel selection, customer information input, and payment type selection.
 
 ## 🌐 Live Demo
@@ -26,7 +24,6 @@ Check out the live demo of the project deployed on Netlify:
 
 YoloTravel leverages a modern tech stack to ensure robust performance and maintainability:
 
-- **[Vue 3](https://v3.vuejs.org/)** with Composition API
 - **[Nuxt 3](https://nuxt.com/v3)**
 - **[TypeScript](https://www.typescriptlang.org/)**
 - **[Tailwind CSS](https://tailwindcss.com/)**
@@ -62,6 +59,3 @@ Follow these steps to set up and run the project locally:
    ```bash
    pnpm build
    ```
-
----
-```
