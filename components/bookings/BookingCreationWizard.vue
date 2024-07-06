@@ -3,7 +3,7 @@
 import { ref } from 'vue';
 import type { ICustomerInfo, IPaymentOptionsFormModel, TCustomerWizardForm } from '~/types/bookings/bookings.model';
 import type { ITravel } from '~/types/travels/travels.model';
-import type { IStep } from '~/types/ui/stepper.model';
+import type { IStep, IStepComponent } from '~/types/ui/stepper.model';
 
 const { t } = useI18n();
 
@@ -47,7 +47,7 @@ const steps = ref<IStep<TCustomerWizardForm>[]>([
 ]);
 
 const currentStepIndex = ref(0);
-const currentStepRef = ref<Component | null>(null);
+const currentStepRef = ref<IStepComponent | null>(null);
 
 function handleStepValidation<T extends TCustomerWizardForm>(stepNumber: number, validationEvent: { formData: T; valid: boolean }): void {
     populateStepFormField(validationEvent.formData, stepNumber);

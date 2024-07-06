@@ -7,3 +7,7 @@ export interface IStep<T> {
     formData?: T;
     valid: boolean;
 }
+
+export interface IStepComponent {
+    submitForm: () => void;
+}
