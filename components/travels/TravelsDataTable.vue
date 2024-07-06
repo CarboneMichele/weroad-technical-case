@@ -65,7 +65,11 @@ onMounted(() => {
                 {{ t('TRAVELS.S02') }}
             </UButton>
         </div>
-        <UTable :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)">
+        <UTable
+            :ui="{ thead: travels.length ? 'relative' : 'hidden',
+            }"
+            :loading="loading" :rows="travels" :columns="columns" @select="emit('rowClick', $event)"
+        >
             <template #departureDate-data="{ row }">
                 <span>{{ utilsService.getFormattedDate(row.departureDate) }}</span>
             </template>

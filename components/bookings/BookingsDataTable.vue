@@ -45,7 +45,10 @@ onMounted(() => {
                 {{ t('BOOKINGS.S02') }}
             </UButton>
         </div>
-        <UTable :loading="loading" :rows="bookings" :columns="columns" @select="emit('rowClick', $event)">
+        <UTable
+            :ui="{ thead: bookings.length ? 'relative' : 'hidden',
+            }" :loading="loading" :rows="bookings" :columns="columns" @select="emit('rowClick', $event)"
+        >
             <template #travel-data="{ row }">
                 <span>{{ row.travel ? row.travel.name : '-' }}</span>
             </template>

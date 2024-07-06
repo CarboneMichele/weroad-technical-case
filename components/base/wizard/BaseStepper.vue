@@ -42,7 +42,3 @@ function isCurrent(index: number): boolean {
         </li>
     </ol>
 </template>
-
-<style lang="scss" scoped>
-
-</style>

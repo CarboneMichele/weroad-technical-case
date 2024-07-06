@@ -1,6 +1,6 @@
 import type { IStep, IStepComponent } from '~/types/ui/stepper.model';
 
-export function useSteps(initialSteps: IStep[]) {
+export function useWizard(initialSteps: IStep[]) {
     const stepsArray = ref<IStep[]>(initialSteps);
     const stepsMap = ref(new Map<string, IStep>());
 

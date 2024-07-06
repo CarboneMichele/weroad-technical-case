@@ -1,6 +1,6 @@
 <!-- pages/index.vue -->
 <script setup lang="ts">
-import { useSteps } from '~/composables/useWizard';
+import { useWizard } from '~/composables/useWizard';
 import type { IBooking, ICustomerInfo, IPaymentOptionsFormModel } from '~/types/bookings/bookings.model';
 import type { ITravel } from '~/types/travels/travels.model';
 import type { IStep } from '~/types/ui/stepper.model';
@@ -59,7 +59,7 @@ const {
     onNextStepClick,
     onPrevStepClick,
     getStepFormData,
-} = useSteps(bookingWizardSteps);
+} = useWizard(bookingWizardSteps);
 
 const bookingWizardForm: ComputedRef<Omit<IBooking, 'id'> | IBooking> = computed(() => {
     return {
