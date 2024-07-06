@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { ITravel } from '~/types/travels/travels.model';
 
-const props = defineProps<{ travel?: ITravel | null }>();
+const props = defineProps<{
+    handleSubmit: () => void;
+    travel?: ITravel | null ;
+}>();
 
 const emit = defineEmits<{
-    (event: 'update:validation', data: { formData: ITravel | null; valid: boolean }): void;
+    (event: 'validate', data: { formData: ITravel | null; valid: boolean }): void;
 }>();
 
 const { travels, loading, fetchTravels } = useTravels();
@@ -16,10 +19,17 @@ async function search(q: string): Promise<ITravel[]> {
     return travels.value;
 }
 
-function submitForm() {
-    console.log('subbmit travel selection');
-    emit('update:validation', { formData: selectedTravel.value, valid: !!selectedTravel.value });
+function validateForm() {
+    if (selectedTravel.value) {
+        emit('validate', { formData: selectedTravel.value, valid: !!selectedTravel.value });
+    }
 }
+
+watch(() => props.triggerValidation, (newValue) => {
+    if (newValue) {
+        validateForm();
+    }
+});
 
 onMounted(() => {
     if (props.travel) {
@@ -27,10 +37,13 @@ onMounted(() => {
     }
 });
 
-defineExpose({ submitForm });
+function submitForm() {
+    props.handleSubmit(); // Chiama la funzione handleSubmit passata dal genitore
+}
 </script>
 
 <template>
+    {{ props.triggerValidation }}
     <div class="flex flex-col gap-7">
         <USelectMenu
             v-model="selectedTravel"

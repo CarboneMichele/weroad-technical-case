@@ -1,9 +1,9 @@
-export interface IStep {
+export interface IStep<T> {
     key: string;
     title: string;
     description: string;
     icon: string;
     hasValidation: boolean;
-    formData?: Record<string, any>;
+    formData?: T;
     valid: boolean;
 }

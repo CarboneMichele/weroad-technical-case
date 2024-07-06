@@ -1,5 +1,11 @@
+import type { ITravel } from '../travels/travels.model';
+
 export interface IBooking {
     id: string;
+    customer: ICustomerInfo;
+    payment: IPaymentOption;
+    notes: string;
+    travel: ITravel;
 }
 
 export interface ICustomerInfo {
@@ -16,3 +22,16 @@ export enum IGender {
     FEMALE = 'FEMALE',
     OTHER = 'OTHER',
 }
+
+export enum IPaymentOption {
+    PAYPAL = 'PAYPAL',
+    REVOLUT = 'REVOLUT',
+    CREDIT = 'CREDIT',
+}
+
+export interface IPaymentOptionsFormModel {
+    options: IPaymentOption;
+    notes: string;
+}
+
+export type TCustomerWizardForm = ITravel | ICustomerInfo | IPaymentOption | IPaymentOptionsFormModel | null;

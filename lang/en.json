@@ -20,7 +20,9 @@
         "S18": "Previous",
         "S19": "Ok",
         "S20": "Phone number",
-        "S21": "Invalid Phone number"
+        "S21": "Invalid Phone number",
+        "S22": "Additional notes"
+
     },
     "PROJECT_COMMON": {
         "S01": "No Travels | Travel | Travels",
@@ -39,7 +41,8 @@
         "S05": "Picture",
         "S06": "Average user rating",
         "S07": "Edit Travel",
-        "S08": "Select a travel"
+        "S08": "Select a travel",
+        "S09": "Search for a travel"
     },
     "BOOKINGS": {
         "S01": "Add booking",
@@ -47,12 +50,16 @@
         "S03": "Filter bookings",
         "S04": "Create booking",
         "S05": "Payment",
-        "S06": "Select a payment method"
+        "S06": "Select a payment method",
+        "S07": "Review",
+        "S08": "Review booking informations"
     },
     "ENUMS": {
         "GENDER_MALE": "Male",
         "GENDER_FEMALE": "Female",
-        "GENDER_OTHER": "Other"
-
+        "GENDER_OTHER": "Other",
+        "PAYMENT_PAYPAL": "PayPal",
+        "PAYMENT_REVOLUT": "Revolut",
+        "PAYMENT_CREDIT": "Credit card"
     }
 }

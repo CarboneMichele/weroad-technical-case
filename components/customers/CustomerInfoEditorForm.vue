@@ -3,14 +3,16 @@ import type { FormError } from '#ui/types';
 import { type ICustomerInfo, IGender } from '~/types/bookings/bookings.model';
 import { utilsService } from '~/services/utils.service';
 
-const props = defineProps<{ triggerValidation?: boolean; customer?: ICustomerInfo }>();
+const props = defineProps<{ customer?: ICustomerInfo | null }>();
 
-const emit = defineEmits(['validate']);
+const emit = defineEmits<{
+    (event: 'update:validation', data: { formData: ICustomerInfo | null; valid: boolean }): void;
+}>();
 
 const { t } = useI18n();
 
 const customerInfoEditorFormRef = ref<HTMLFormElement>();
-const customerFormModel = ref<Partial<ICustomerInfo>>({
+const customerFormModel = ref<ICustomerInfo>({
     firstName: '',
     lastName: '',
     age: null,
@@ -18,7 +20,6 @@ const customerFormModel = ref<Partial<ICustomerInfo>>({
     phone: null,
     email: '',
 });
-const isEdit = ref(props.customer);
 
 function populateForm(): void {
     if (props.customer) {
@@ -26,8 +27,12 @@ function populateForm(): void {
     }
 }
 
-function validate(state: Partial<ICustomerInfo>): FormError[] {
-    const requiredFields: (keyof ICustomerInfo)[] = ['firstName', 'lastName', 'email', 'age', 'phone'];
+function submitForm(): void {
+    customerInfoEditorFormRef.value?.submit();
+}
+
+function handleValidation(state: ICustomerInfo): FormError[] {
+    const requiredFields: (keyof ICustomerInfo)[] = ['firstName'];
     const errors: FormError[] = [];
 
     requiredFields.forEach((field) => {
@@ -43,28 +48,26 @@ function validate(state: Partial<ICustomerInfo>): FormError[] {
     return errors;
 }
 
-async function onSubmit() {
-    emit('validate', true);
+async function onSubmitSuccess() {
+    emit('update:validation', { formData: customerFormModel.value, valid: true });
 }
-async function onError() {
-    emit('validate', false);
+async function onSubmitError() {
+    emit('update:validation', { formData: customerFormModel.value, valid: false });
 }
 
 onMounted(() => {
-    if (isEdit.value) {
+    if (props.customer) {
         populateForm();
     }
 });
 
-watch(() => props.triggerValidation, (newValue) => {
-    if (newValue) {
-        customerInfoEditorFormRef.value?.submit();
-    }
+defineExpose({
+    submitForm,
 });
 </script>
 
 <template>
-    <UForm ref="customerInfoEditorFormRef" :validate="validate" :validate-on="['submit']" :state="customerFormModel" class="flex flex-col gap-y-3" @submit="onSubmit" @error="onError">
+    <UForm ref="customerInfoEditorFormRef" :validate="handleValidation" :validate-on="['submit']" :state="customerFormModel" class="flex flex-col gap-y-3" @submit="onSubmitSuccess" @error="onSubmitError">
         <div class="flex gap-2 flex-wrap md:flex-nowrap">
             <UFormGroup :label="t('COMMON.S11')" name="firstName" required class="w-full md:w-1/2">
                 <UInput v-model="customerFormModel.firstName" />
@@ -80,17 +83,18 @@ watch(() => props.triggerValidation, (newValue) => {
                 <UInput v-model="customerFormModel.email" />
             </UFormGroup>
             <UFormGroup class="w-full md:w-1/2" :label="t('COMMON.S12')" name="age" required>
-                <UInput type="number" />
+                <UInput v-model="customerFormModel.age" type="number" />
             </UFormGroup>
         </div>
         <div class="flex gap-2 flex-wrap md:flex-nowrap">
             <UFormGroup
                 :label="t('COMMON.S20')" name="phone" class="w-full md:w-1/2" required
             >
-                <UInput type="number" icon="i-heroicons-phone" />
+                <UInput v-model="customerFormModel.phone" type="number" icon="i-heroicons-phone" />
             </UFormGroup>
             <UFormGroup class="w-full md:w-1/2" :label="t('COMMON.S13')" name="gender">
                 <USelect
+                    v-model="customerFormModel.gender"
                     :options="utilsService.getDropdownOptions(IGender, 'ENUMS.GENDER', t)" option-attribute="label"
                 />
             </UFormGroup>

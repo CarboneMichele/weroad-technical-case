@@ -3,12 +3,12 @@ import type { ComposerTranslation } from 'vue-i18n';
 import type { ISelectOption } from '~/types/ui/selectOption.model';
 
 class UtilsService {
-    //* * DATES */
+    // DATES
     getFormattedDate(dateStr: string, stringFormat = 'dd/MM/yyyy'): string {
         return isValid(new Date(dateStr)) ? format(new Date(dateStr), stringFormat) : '-';
     }
 
-    //* *FILES *
+    // FILES
     base64ToBlob(base64: string) {
         const contentType = 'application/octet-stream';
 
@@ -53,6 +53,11 @@ class UtilsService {
             });
         }
         return options;
+    }
+
+    // TIMEOUT
+    async wait(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 

@@ -3,7 +3,7 @@
 import type { IStep } from '~/types/ui/stepper.model';
 
 const props = defineProps<{
-    steps: IStep[];
+    steps: IStep<any>[];
     currentStep: number;
 }>();
 
@@ -21,10 +21,10 @@ const { steps, currentStep } = toRefs(props);
         </div>
 
         <div class="flex gap-2 items-center w-full justify-center mt-4">
-            <UButton :disabled="currentStep === 0" @click="emit('prevStep')">
+            <UButton :disabled="currentStep === 0" @click.stop="emit('prevStep')">
                 {{ $t('COMMON.S18') }}
             </UButton>
-            <UButton :disabled="currentStep === steps.length - 1" @click="emit('nextStep')">
+            <UButton :disabled="currentStep === steps.length - 1" @click.stop="emit('nextStep')">
                 {{ $t('COMMON.S17') }}
             </UButton>
         </div>
