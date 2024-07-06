@@ -59,3 +59,4 @@ Follow these steps to set up and run the project locally:
    ```bash
    pnpm build
    ```
+s
