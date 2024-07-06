@@ -21,8 +21,13 @@
         "S19": "Ok",
         "S20": "Phone number",
         "S21": "Invalid Phone number",
-        "S22": "Additional notes"
+        "S22": "Additional notes",
+        "S23": "You must be at least 18",
+        "S24": "Finalize"
 
+    },
+    "BRAND": {
+        "S01": "YOLO"
     },
     "PROJECT_COMMON": {
         "S01": "No Travels | Travel | Travels",

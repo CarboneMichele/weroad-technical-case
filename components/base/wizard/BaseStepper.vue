@@ -6,15 +6,27 @@ const props = defineProps<{
     currentStep: number;
 }>();
 
-function isActiveStep(index: number): boolean {
-    return props.currentStep >= index;
+function wasActive(index: number): boolean {
+    return props.currentStep > index;
+}
+function isCurrent(index: number): boolean {
+    return props.currentStep === index;
 }
 </script>
 
 <template>
     <ol class="items-center md:justify-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
-        <li v-for="(step, index) in props.steps" :key="index" class="flex items-start space-x-2.5 rtl:space-x-reverse" :class="[isActiveStep(index) ? 'text-primary-500 dark:text-primary-500' : 'text-gray-500 dark:text-gray-500']">
-            <span class="flex items-center justify-center w-8 h-8 border border-gray-600 rounded-full shrink-0 dark:border-gray-500" :class="[isActiveStep(index) ? 'border-primary-600 dark:border-primary-500' : 'border-gray-600 dark:border-gray-500']">
+        <li
+            v-for="(step, index) in props.steps" :key="index" class="flex items-start space-x-2.5 rtl:space-x-reverse" :class="[
+                wasActive(index) ? 'text-primary-300 dark:text-primary-300' : 'text-gray-500 dark:text-gray-500',
+                isCurrent(index) ? 'text-primary-500 dark:text-primary-500' : 'text-gray-500 dark:text-gray-500',
+            ]"
+        >
+            <span
+                class="flex items-center justify-center w-8 h-8 border border-gray-600 rounded-full shrink-0 dark:border-gray-500" :class="[
+                    wasActive(index) ? 'border-primary-400 dark:border-primary-400' : 'border-gray-600 dark:border-gray-500',
+                    isCurrent(index) ? 'border-primary-600 dark:border-primary-500' : 'border-gray-600 dark:border-gray-500']"
+            >
                 <template v-if="step.icon">
                     <UIcon :name="`i-heroicons-${step.icon}` " dynamic />
                 </template>

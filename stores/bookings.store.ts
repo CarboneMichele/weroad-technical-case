@@ -31,11 +31,12 @@ export const useBookingsStore = defineStore('bookings', {
                 this.setLoading();
             }
         },
-        async addBooking(booking: Partial<IBooking>): Promise<void> {
+        async addBooking(booking: Omit<IBooking, 'id'>): Promise<IBooking | void> {
             this.setLoading(true);
             try {
                 const newBooking = await bookingsService.addBooking(booking);
                 this.bookings.push(newBooking);
+                return newBooking;
             }
 
             finally {

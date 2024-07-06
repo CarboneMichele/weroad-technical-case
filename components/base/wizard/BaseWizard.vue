@@ -3,13 +3,16 @@
 import type { IStep } from '~/types/ui/stepper.model';
 
 const props = defineProps<{
-    steps: IStep<any>[];
+    steps: IStep[];
     currentStep: number;
+    loading?: boolean;
 }>();
 
-const emit = defineEmits(['nextStep', 'prevStep']);
+const emit = defineEmits(['nextStep', 'prevStep', 'finalize']);
 
 const { steps, currentStep } = toRefs(props);
+
+const showFinalizeConfirmation = ref(false);
 </script>
 
 <template>
@@ -24,9 +27,14 @@ const { steps, currentStep } = toRefs(props);
             <UButton :disabled="currentStep === 0" @click.stop="emit('prevStep')">
                 {{ $t('COMMON.S18') }}
             </UButton>
-            <UButton :disabled="currentStep === steps.length - 1" @click.stop="emit('nextStep')">
+            <UButton v-if="currentStep !== steps.length - 1" :disabled="currentStep === steps.length - 1" @click.stop="emit('nextStep')">
                 {{ $t('COMMON.S17') }}
             </UButton>
+            <BasePopConfirm v-if="currentStep === steps.length - 1" :show="showFinalizeConfirmation" @update:show="showFinalizeConfirmation = $event" @negative="showFinalizeConfirmation = false" @positive="emit('finalize')">
+                <UButton :loading="props.loading">
+                    {{ $t('COMMON.S24') }}
+                </UButton>
+            </BasePopConfirm>
         </div>
     </div>
 </template>

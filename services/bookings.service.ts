@@ -11,7 +11,7 @@ class BookingsService {
         return await useCustomFetch().get(`/bookings/${id}`);
     }
 
-    async addBooking(booking: Partial<IBooking>): Promise<IBooking> {
+    async addBooking(booking: Omit<IBooking, 'id'>): Promise<IBooking> {
         return await useCustomFetch().post('/bookings', booking);
     }
 }

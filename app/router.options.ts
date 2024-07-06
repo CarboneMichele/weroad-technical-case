@@ -5,14 +5,8 @@ export default <RouterConfig> {
     routes: _routes => [
         {
             path: '/:catchAll(.*)*',
-            redirect: { name: 'home' },
+            redirect: { name: 'travels' },
             props: true,
-        },
-        {
-            path: '/',
-            name: 'home',
-            component: () => import('~/pages/index.vue'),
-            meta: { icon: 'home' },
         },
         {
             path: '/travels',
@@ -30,11 +24,6 @@ export default <RouterConfig> {
             name: 'bookings',
             component: () => import('~/pages/bookings/Bookings.vue'),
             meta: { icon: 'book-open' },
-        },
-        {
-            path: '/bookings/:id',
-            name: 'booking',
-            component: () => import('~/pages/bookings/BookingDetail.vue'),
         },
     ],
 };

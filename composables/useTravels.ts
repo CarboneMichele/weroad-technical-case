@@ -13,8 +13,8 @@ export function useTravels() {
         return await travelStore.fetchTravelDetails(id);
     }
 
-    async function addTravel(travel: Partial<ITravel>) {
-        await travelStore.addTravel(travel);
+    async function addTravel(travel: Omit<ITravel, 'id'>): Promise<void | ITravel> {
+        return await travelStore.addTravel(travel);
     }
 
     async function updateTravel(id: string, updatedTravel: Partial<ITravel>) {

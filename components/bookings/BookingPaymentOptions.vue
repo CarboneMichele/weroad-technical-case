@@ -9,7 +9,7 @@ const emit = defineEmits<{
 }>();
 
 const paymentsFormModel = ref<IPaymentOptionsFormModel>({
-    options: IPaymentOption.PAYPAL,
+    option: IPaymentOption.PAYPAL,
     notes: '',
 });
 
@@ -28,11 +28,11 @@ defineExpose({ submitForm });
 
 <template>
     <div class="w-full max-w-[400px] mx-auto">
-        <BasePaymentMethod v-model="paymentsFormModel.options" :card-type="IPaymentOption.PAYPAL" :size="30" />
-        <BasePaymentMethod v-model="paymentsFormModel.options" :card-type="IPaymentOption.REVOLUT" :size="30" />
-        <BasePaymentMethod v-model="paymentsFormModel.options" :card-type="IPaymentOption.CREDIT" :size="50" />
+        <BasePaymentMethod v-model="paymentsFormModel.option" :card-type="IPaymentOption.PAYPAL" :size="30" />
+        <BasePaymentMethod v-model="paymentsFormModel.option" :card-type="IPaymentOption.REVOLUT" :size="30" />
+        <BasePaymentMethod v-model="paymentsFormModel.option" :card-type="IPaymentOption.CREDIT" :size="50" />
 
-        <UFormGroup :label="$t('COMMON.S22')">
+        <UFormGroup :label="$t('COMMON.S22')" class="mt-6">
             <UTextarea v-model="paymentsFormModel.notes" :rows="3" autoresize />
         </UFormGroup>
     </div>

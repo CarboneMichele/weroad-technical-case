@@ -1,37 +1,18 @@
 class ValidatorsService {
-    alphanumericValidator(text: string): boolean {
-        const alphanumericRegex = /^[a-z0-9]+$/i;
-        return !alphanumericRegex.test(text);
+    phoneNumberValidator(phoneNumber: number): boolean {
+        const phoneNumberString = phoneNumber.toString();
+        // Italian phone number pattern: Starts with 3, followed by 9 digits
+        const italianPhoneNumberRegex = /^3\d{9}$/;
+        return !italianPhoneNumberRegex.test(phoneNumberString);
     }
 
     emailValidator(email: string): boolean {
-        const emailRegex = /^\w+([+-.]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})$/;
+        const emailRegex = /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/;
         return !emailRegex.test(email);
     }
 
-    exactLengthValidator(formValue: string, length: number): boolean {
-        return formValue.length !== length;
-    }
-
-    maxLengthValidator(formValue: string, maxLength: number): boolean {
-        return formValue.length > maxLength;
-    }
-
-    minLengthValidator(formValue: string, minLength: number): boolean {
-        return formValue.length < minLength;
-    }
-
-    maxNumberValidator(formValue: number, maxValue: number): boolean {
-        return formValue > maxValue;
-    }
-
-    minNumberValidator(formValue: number, minValue: number): boolean {
-        return formValue < minValue;
-    }
-
-    onlyLettersValidator(text: string): boolean {
-        const onlyLettersRegex = /^[a-z]+$/i;
-        return !onlyLettersRegex.test(text);
+    ageValidator(age: number): boolean {
+        return age < 18;
     }
 }
 

@@ -58,7 +58,7 @@ function validate(state: Partial<ITravel>): FormError[] {
     return errors;
 }
 
-async function onSubmit(form: FormSubmitEvent<Partial<ITravel>>) {
+async function onSubmit(form: FormSubmitEvent<Omit<ITravel, 'id'>>) {
     if (isEdit.value) {
         await updateTravel(props.travel?.id as string, form.data);
         await fetchTravelDetails(props.travel?.id as string);

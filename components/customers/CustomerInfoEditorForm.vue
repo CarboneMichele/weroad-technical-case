@@ -2,6 +2,7 @@
 import type { FormError } from '#ui/types';
 import { type ICustomerInfo, IGender } from '~/types/bookings/bookings.model';
 import { utilsService } from '~/services/utils.service';
+import { validatorsService } from '~/services/validators.service';
 
 const props = defineProps<{ customer?: ICustomerInfo | null }>();
 
@@ -32,7 +33,7 @@ function submitForm(): void {
 }
 
 function handleValidation(state: ICustomerInfo): FormError[] {
-    const requiredFields: (keyof ICustomerInfo)[] = ['firstName'];
+    const requiredFields: (keyof ICustomerInfo)[] = ['firstName', 'age', 'email', 'lastName', 'phone'];
     const errors: FormError[] = [];
 
     requiredFields.forEach((field) => {
@@ -41,9 +42,17 @@ function handleValidation(state: ICustomerInfo): FormError[] {
         }
     });
 
-    // Phone number validator
+    if (state.phone && validatorsService.phoneNumberValidator(state.phone)) {
+        errors.push({ path: 'phone', message: t('COMMON.S21') });
+    }
 
-    // Email Validator
+    if (state.email && validatorsService.emailValidator(state.email)) {
+        errors.push({ path: 'email', message: t('COMMON.S15') });
+    }
+
+    if (state.age && validatorsService.ageValidator(state.age)) {
+        errors.push({ path: 'age', message: t('COMMON.S23') });
+    }
 
     return errors;
 }

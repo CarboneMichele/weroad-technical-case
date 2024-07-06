@@ -30,7 +30,7 @@ export enum IPaymentOption {
 }
 
 export interface IPaymentOptionsFormModel {
-    options: IPaymentOption;
+    option: IPaymentOption;
     notes: string;
 }
 

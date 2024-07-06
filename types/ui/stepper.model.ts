@@ -1,10 +1,10 @@
-export interface IStep<T> {
+export interface IStep {
     key: string;
     title: string;
     description: string;
     icon: string;
     hasValidation: boolean;
-    formData?: T;
+    formData?: any;
     valid: boolean;
 }
 

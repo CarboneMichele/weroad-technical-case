@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ icon?: string; label: string; value: string | number }>();
+const props = defineProps<{ icon?: string; label: string; value: string | number | null }>();
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const props = defineProps<{ icon?: string; label: string; value: string | number
             </p>
         </div>
         <p class="text-base">
-            {{ props.value }}
+            {{ props.value || '-' }}
         </p>
     </div>
 </template>

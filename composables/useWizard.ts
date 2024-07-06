@@ -1,78 +1,88 @@
-import { ref } from 'vue';
-import type { Ref } from 'vue';
-import type { IStep } from '~/types/ui/stepper.model';
+import type { IStep, IStepComponent } from '~/types/ui/stepper.model';
 
-interface WizardComposable<T> {
-    steps: Ref<IStep<T>[]>;
-    currentStep: Ref<number>;
-    validate: Ref<boolean>;
-    triggerValidation: () => void;
-    resetValidation: () => void;
-    setValidationStatus: ({ formData, valid }: { formData: T; valid: boolean }) => void;
-    handleStepValidation: (stepNumber: number, validationEvent: { formData: T; valid: boolean }) => void;
-    nextStep: (skipValidation?: boolean) => void;
-    prevStep: () => void;
-}
+export function useSteps(initialSteps: IStep[]) {
+    const stepsArray = ref<IStep[]>(initialSteps);
+    const stepsMap = ref(new Map<string, IStep>());
 
-export function useWizard<T>(initialSteps: IStep<T>[]): WizardComposable<T> {
-    const steps = ref<IStep<T>[]>(initialSteps);
-    const currentStep = ref(0);
-    const validate = ref(false);
+    const currentStepKey = ref<string>(stepsArray.value[0].key);
+    const currentStepRef = ref<IStepComponent | null>(null);
 
-    function triggerValidation(): void {
-        validate.value = true;
+    // Populate stepsMap from stepsArray
+    function populateStepsMap(): void {
+        stepsMap.value.clear();
+        stepsArray.value.forEach((step: IStep) => {
+            stepsMap.value.set(step.key, step);
+        });
     }
 
-    function resetValidation(): void {
-        validate.value = false;
-    }
+    populateStepsMap();
 
-    function setValidationStatus({ valid }: { formData: T; valid: boolean }): void {
-        resetValidation();
-        nextStep(valid);
-    }
+    function handleStepValidation(stepKey: string, validationEvent: { formData: any; valid: boolean }): void {
+        populateStepFormField(validationEvent.formData, stepKey);
 
-    function handleStepValidation(stepNumber: number, validationEvent: { formData: T; valid: boolean }): void {
-        setValidationStatus(validationEvent);
-        populateStepFormField(validationEvent.formData, stepNumber);
-    }
-
-    function populateStepFormField(formData: T, stepNumber: number): void {
-        (steps.value[stepNumber].formData as T) = formData;
-    }
-
-    function nextStep(skipValidation?: boolean) {
-        if (steps.value[currentStep.value].hasValidation) {
-            if (skipValidation) {
-                currentStep.value++;
+        const step = stepsMap.value.get(stepKey);
+        if (step) {
+            step.valid = validationEvent.valid;
+            if (validationEvent.valid) {
+                goNext();
             }
-            else {
-                triggerValidation();
+        }
+    }
+
+    function populateStepFormField(formData: any, stepKey: string): void {
+        const step = stepsMap.value.get(stepKey);
+        if (step) {
+            step.formData = formData;
+        }
+    }
+
+    function onNextStepClick() {
+        const currentStep = stepsMap.value.get(currentStepKey.value);
+        if (currentStep && currentStep.hasValidation) {
+            // validate
+            if (currentStepRef.value) {
+                currentStepRef.value.submitForm();
             }
         }
         else {
-            if (currentStep.value < steps.value.length - 1) {
-                currentStep.value++;
-            }
+            goNext();
         }
     }
 
-    function prevStep() {
-        if (currentStep.value > 0) {
-            resetValidation();
-            currentStep.value--;
+    function onPrevStepClick() {
+        const stepKeys = Array.from(stepsMap.value.keys());
+        const currentIndex = stepKeys.indexOf(currentStepKey.value);
+        if (currentIndex > 0) {
+            currentStepKey.value = stepKeys[currentIndex - 1];
         }
     }
+
+    function goNext() {
+        const stepKeys = Array.from(stepsMap.value.keys());
+        const currentIndex = stepKeys.indexOf(currentStepKey.value);
+        if (currentIndex < stepKeys.length - 1) {
+            currentStepKey.value = stepKeys[currentIndex + 1];
+        }
+    }
+
+    function getStepFormData<T>(stepKey: string): T {
+        return stepsMap.value.get(stepKey)?.formData || null;
+    }
+
+    const currentStepIndex = computed(() => {
+        const stepKeys = Array.from(stepsMap.value.keys());
+        return stepKeys.indexOf(currentStepKey.value);
+    });
 
     return {
-        steps,
-        currentStep,
-        validate,
-        triggerValidation,
-        resetValidation,
-        setValidationStatus,
+        stepsArray,
+        currentStepKey,
+        currentStepRef,
         handleStepValidation,
-        nextStep,
-        prevStep,
+        onNextStepClick,
+        onPrevStepClick,
+        goNext,
+        getStepFormData,
+        currentStepIndex,
     };
 }

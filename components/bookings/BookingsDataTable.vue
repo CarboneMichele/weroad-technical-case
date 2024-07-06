@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { _gridRowEnd, _ringOffsetWidth } from '#tailwind-config/theme';
 import { useBookings } from '~/composables/useBookings';
-import { utilsService } from '~/services/utils.service';
 
 const emit = defineEmits(['toggleBookingCreation', 'rowClick']);
 const { t } = useI18n();
@@ -46,11 +46,11 @@ onMounted(() => {
             </UButton>
         </div>
         <UTable :loading="loading" :rows="bookings" :columns="columns" @select="emit('rowClick', $event)">
-            <template #departureDate-data="{ row }">
-                <span>{{ utilsService.getFormattedDate(row.departureDate) }}</span>
+            <template #travel-data="{ row }">
+                <span>{{ row.travel ? row.travel.name : '-' }}</span>
             </template>
-            <template #returnDate-data="{ row }">
-                <span>{{ utilsService.getFormattedDate(row.returnDate) }}</span>
+            <template #customer-data="{ row }">
+                <span>{{ row.customer ? `${row.customer.firstName} ${row.customer.lastName}` : '-' }}</span>
             </template>
 
             <template #empty-state>

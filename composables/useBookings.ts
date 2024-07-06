@@ -6,19 +6,19 @@ export function useBookings() {
     const bookingStore = useBookingsStore();
     const { bookings, loading, selectedBooking } = storeToRefs(bookingStore);
 
-    async function fetchBookings(q?: string) {
-        await bookingStore.fetchBookings(q);
+    async function fetchBookings(q?: string): Promise<void | IBooking[]> {
+        return await bookingStore.fetchBookings(q);
     }
     async function fetchBookingDetails(id: string): Promise<void | IBooking> {
         return await bookingStore.fetchBookingDetails(id);
     }
 
-    async function addBooking(booking: Partial<IBooking>) {
-        await bookingStore.addBooking(booking);
+    async function addBooking(booking: Omit<IBooking, 'id'>): Promise<void | IBooking> {
+        return await bookingStore.addBooking(booking);
     }
 
-    async function setSelectedBooking(booking?: IBooking) {
-        await bookingStore.setSelectedBooking(booking);
+    function setSelectedBooking(booking?: IBooking): void {
+        bookingStore.setSelectedBooking(booking);
     }
 
     return {

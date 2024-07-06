@@ -10,7 +10,18 @@ function delay(milliseconds: number = 1000): Promise<void> {
 }
 
 // TRAVELS
-let travels: ITravel[] = [];
+let travels: ITravel[] = [
+    // {
+    //     name: 'Default Travel',
+    //     departureDate: '2024-07-05T10:05:44.509Z',
+    //     returnDate: '2024-07-06T10:05:44.509Z',
+    //     picture: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=',
+    //     description: 'desc',
+    //     price: 1230,
+    //     rating: 3.2,
+    //     id: '9fa6fc23-101a-467b-83a7-301fc611e151',
+    // },
+];
 
 export async function getTravels(): Promise<ITravel[]> {
     await delay(1000);
@@ -55,4 +66,11 @@ export async function getBookingById(id: string): Promise<IBooking | undefined> 
     const allBookings = await getBookings();
     await delay(1000);
     return allBookings.find(bookings => bookings.id === id);
+}
+
+export async function addBooking(booking: Omit<IBooking, 'id'>) {
+    await delay(1000);
+    const newBooking = { ...booking, id: uuidv4() };
+    bookings.push(newBooking);
+    return newBooking;
 }

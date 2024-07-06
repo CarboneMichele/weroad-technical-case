@@ -31,7 +31,7 @@ export const useTravelsStore = defineStore('travels', {
                 this.setLoading();
             }
         },
-        async addTravel(travel: Partial<ITravel>): Promise<void> {
+        async addTravel(travel: Omit<ITravel, 'id'>): Promise<void> {
             this.setLoading(true);
             try {
                 const newTravel = await travelsService.addTravel(travel);
