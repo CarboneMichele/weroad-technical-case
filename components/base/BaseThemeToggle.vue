@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
 const isDarkMode = ref(colorMode.preference === 'dark');
+const isSystemMode = ref(colorMode.preference === 'system');
 
 function toggleColorMode(value: boolean) {
     isDarkMode.value = value;
@@ -12,7 +13,12 @@ watch(() => colorMode.preference, (newPreference) => {
 });
 
 onBeforeMount(() => {
-    colorMode.value = 'light';
+    if (isSystemMode.value) {
+        toggleColorMode(false);
+    }
+    if (isDarkMode.value) {
+        toggleColorMode(true);
+    }
 });
 </script>
 
