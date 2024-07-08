@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { _gridRowEnd, _ringOffsetWidth } from '#tailwind-config/theme';
 import { useBookings } from '~/composables/useBookings';
 
 const emit = defineEmits(['toggleBookingCreation', 'rowClick']);
