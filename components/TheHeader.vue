@@ -12,12 +12,24 @@ const emit = defineEmits(['toggle-menu']);
             </div>
             <div class="flex items-center space-x-4">
                 <BaseThemeToggle />
-                <!-- Hamburger Menu -->
-                <button class="md:hidden focus:outline-none" @click="emit('toggle-menu')">
-                    <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
+                <UButton
+                    :ui="{
+                        icon: {
+                            base: 'text-white',
+                        },
+                        color: {
+                            white: {
+                                ghost: 'text-gray-900 dark:text-white hover:bg-primary dark:hover:bg-gray-900 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400',
+                            },
+                        },
+                    }"
+                    icon="i-heroicons-bars-3"
+                    size="xl"
+                    square
+                    variant="ghost"
+                    color="white"
+                    @click="emit('toggle-menu')"
+                />
             </div>
         </div>
     </header>
