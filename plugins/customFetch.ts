@@ -1,4 +1,4 @@
-import { type $Fetch, $fetch, type FetchResponse, type IFetchError } from 'ofetch';
+import { type $Fetch, $fetch } from 'ofetch';
 
 export default defineNuxtPlugin(() => {
     const toast = useToast();
