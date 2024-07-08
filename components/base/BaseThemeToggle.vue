@@ -10,6 +10,10 @@ function toggleColorMode(value: boolean) {
 watch(() => colorMode.preference, (newPreference) => {
     isDarkMode.value = newPreference === 'dark';
 });
+
+onBeforeMount(() => {
+    colorMode.value = 'light';
+});
 </script>
 
 <template>
